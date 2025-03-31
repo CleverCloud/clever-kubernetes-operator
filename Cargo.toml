@@ -3,7 +3,7 @@
 [package]
 name = "clever-operator"
 description = "A kubernetes operator that expose clever cloud's resources through custom resource definition"
-version = "0.6.0"
+version = "0.7.0"
 edition = "2024"
 rust-version = "1.85.0"
 authors = ["Florentin Dubois <florentin.dubois@clever-cloud.com>"]

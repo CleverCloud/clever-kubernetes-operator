@@ -16,7 +16,7 @@ KUBE_VERSION		?= v1.30.0
 
 OLM_SDK		    	?= $(shell which operator-sdk)
 OLM_SDK_VERSION		?= 1.39.1
-OLM_VERSION			?= 0.6.0
+OLM_VERSION			?= 0.7.0
 
 OCP_VALIDATOR		?= $(shell which ocp-olm-catalog-validator)
 OCP_VERSION			?= 0.1.0
@@ -70,7 +70,7 @@ docker-push: docker-build
 # ------------------------------------------------------------------------------
 # Kubernetes deployment
 .PHONY: crd
-crd: build $(DEPLOY_OLM)/manifests/clever-operator-pulsar.crd.yaml $(DEPLOY_KUBE)/10-custom-resource-definition.yaml $(DEPLOY_OLM)/manifests/clever-operator-mongodb.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-mysql.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-postgresql.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-redis.crd.yaml
+crd: build $(DEPLOY_OLM)/manifests/clever-operator-pulsar.crd.yaml $(DEPLOY_KUBE)/10-custom-resource-definition.yaml $(DEPLOY_OLM)/manifests/clever-operator-mongodb.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-mysql.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-postgresql.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-redis.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-matomo.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-metabase.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-keycloak.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-otoroshi.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-cellar.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-azimutt.crd.yaml
 
 $(DEPLOY_KUBE)/10-custom-resource-definition.yaml:
 	$(DIST)/$(NAME) custom-resource-definition view > $(DEPLOY_KUBE)/10-custom-resource-definition.yaml
@@ -96,6 +96,24 @@ $(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.yaml:
 $(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml:
 	$(DIST)/$(NAME) custom-resource-definition view config-provider > $(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml
 
+$(DEPLOY_OLM)/manifests/clever-operator-metabase.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view metabase > $(DEPLOY_OLM)/manifests/clever-operator-metabase.crd.yaml
+
+$(DEPLOY_OLM)/manifests/clever-operator-keycloak.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view keycloak > $(DEPLOY_OLM)/manifests/clever-operator-keycloak.crd.yaml
+
+$(DEPLOY_OLM)/manifests/clever-operator-otoroshi.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view otoroshi > $(DEPLOY_OLM)/manifests/clever-operator-otoroshi.crd.yaml
+
+$(DEPLOY_OLM)/manifests/clever-operator-cellar.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view cellar > $(DEPLOY_OLM)/manifests/clever-operator-cellar.crd.yaml
+
+$(DEPLOY_OLM)/manifests/clever-operator-azimutt.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view azimutt > $(DEPLOY_OLM)/manifests/clever-operator-azimutt.crd.yaml
+
+$(DEPLOY_OLM)/manifests/clever-operator-matomo.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view matomo > $(DEPLOY_OLM)/manifests/clever-operator-matomo.crd.yaml
+
 .PHONY: validate
 validate: $(shell $(FIND) . -type f -name '*.yaml')
 	$(KUBE_SCORE) score $(shell $(FIND) $(DEPLOY_KUBE) -type f -name '*.yaml')
@@ -120,6 +138,12 @@ deploy-olm-crd: crd $(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.ya
 	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-pulsar.crd.yaml
 	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml
 	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-otoroshi.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-cellar.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-azimutt.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-metabase.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-keycloak.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-matomo.crd.yaml
 
 .PHONY: deploy-olm
 deploy-olm: crd validate deploy-olm-crd

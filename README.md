@@ -110,7 +110,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/CleverCloud/clever-operator
 
 ### Global
 
-To work properly, the operator needs to be configured with at least credentials to connect the Clever Cloud's API. 
+To work properly, the operator needs to be configured with at least credentials to connect the Clever Cloud's API.
 Those configurations could be provided through a `ConfigMap`, a `Secret` or by the environment.
 
 An example of deployment using a `Secret` is located at [deployments/kubernetes/v1.30.0/20-deployment.yaml](./deployments/kubernetes/v1.30.0/20-deployment.yaml).

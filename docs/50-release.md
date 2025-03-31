@@ -8,7 +8,7 @@
 
 ### Create operator-lifecycle-manager manifests for the new release
 
-Firstly, you will need to duplicate manifests located in `deployments/operator-lifecycle-manager/bundle-<latest-release>` to the new release. 
+Firstly, you will need to duplicate manifests located in `deployments/operator-lifecycle-manager/bundle-<latest-release>` to the new release.
 Once this is done, you will get something like below.
 
 ```
@@ -28,17 +28,17 @@ deployments/operator-lifecycle-manager/bundle-<new-release>
       └── config.yaml
 ```
 
-You have to edit the file `clever-operator.clusterserviceversion.yaml` to update the `<latest-release>` in to the new version `<new-release>` 
+You have to edit the file `clever-operator.clusterserviceversion.yaml` to update the `<latest-release>` in to the new version `<new-release>`
 and as well update docker image to the latest commit of the `main` branch.
 
 ### Update the continuous integration to build the new release
 
-You will have to edit the `.github/ci.yaml` file and replace as well the `<latest-release>` by the `<new-release>` in task 
+You will have to edit the `.github/ci.yaml` file and replace as well the `<latest-release>` by the `<new-release>` in task
 `docker-build-and-push-openshift-manifest`.
 
 ### Update Dockerfile
 
-You will have to update the `Dockerfile` to bump the value of `version` label. 
+You will have to update the `Dockerfile` to bump the value of `version` label.
 
 ### Update the Makefile
 
@@ -72,6 +72,6 @@ Now, you are able once the continuous integration is ok, to create GitHub releas
 
 ## Publish new release on OperatorHub
 
-You are now able to publish a new release on the OperatorHub, to do that create a pull request 
-on the [k8s-operatorhub/community-operators](https://github.com/k8s-operatorhub/community-operators/) 
+You are now able to publish a new release on the OperatorHub, to do that create a pull request
+on the [k8s-operatorhub/community-operators](https://github.com/k8s-operatorhub/community-operators/)
 with the freshly created manifests in `deployments/operator-lifecycle-manager/bundle-<new-release>`.
