@@ -13,7 +13,6 @@ readme = "README.md"
 keywords = ["kubernetes", "operator", "clevercloud", "openshift"]
 
 [dependencies]
-async-trait = "^0.1.87"
 axum = { version = "^0.8.1", default-features = false, features = [
     "http1",
     "tokio",
@@ -25,8 +24,8 @@ axum = { version = "^0.8.1", default-features = false, features = [
 ] }
 base64 = "^0.22.1"
 chrono = { version = "^0.4.40", default-features = false }
-clap = { version = "^4.5.32", features = ["derive"] }
-clevercloud-sdk = { version = "^0.14.0", features = ["jsonschemas"] }
+clap = { version = "^4.5.34", features = ["derive"] }
+clevercloud-sdk = { version = "0.15.0", features = ["jsonschemas"] }
 config = "^0.15.9"
 futures = "^0.3.31"
 hostname = "^0.4.0"
@@ -44,8 +43,8 @@ k8s-openapi = { version = "^0.24.0", default-features = false, features = [
     "v1_30",
 ] }
 mime = { version = "^0.3.17" }
-paw = "^1.0.0"
-prometheus = { version = "^0.13.4", optional = true }
+paw = { version = "^1.0.0" }
+prometheus = { version = "^0.14.0", optional = true }
 schemars = { version = "^0.8.21", features = [
     "chrono",
     "indexmap1",
@@ -53,7 +52,7 @@ schemars = { version = "^0.8.21", features = [
     "bytes",
     "url",
 ] }
-serde = { version = "1.0.219", features = ["derive"] }
+serde = { version = "^1.0.219", features = ["derive"] }
 serde_json = { version = "^1.0.140", features = [
     "preserve_order",
     "float_roundtrip",
@@ -63,7 +62,7 @@ tempfile = "^3.18.0"
 toml = "^0.8.20"
 thiserror = "^2.0.12"
 tokio = { version = "^1.44.0", features = ["full"] }
-tracing = "^0.1.41"
+tracing = { version = "^0.1.41" }
 tracing-subscriber = { version = "^0.3.19", default-features = false, features = [
     "std",
     "ansi",
@@ -73,7 +72,7 @@ tracing-subscriber = { version = "^0.3.19", default-features = false, features =
 default = ["logging", "metrics", "tracing"]
 logging = ["clevercloud-sdk/logging"]
 metrics = ["clevercloud-sdk/metrics", "prometheus"]
-tracing = ["clevercloud-sdk/tracing", "clevercloud-sdk/tokio"]
+tracing = ["clevercloud-sdk/tracing"]
 
 [profile.release]
 lto = true
