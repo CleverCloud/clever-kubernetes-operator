@@ -59,14 +59,14 @@ performed) with the following schema:
 sequenceDiagram
     autonumber
     Jane Doe->>Apiserver: Could you create this resource?
-    Apiserver->>clever-operator: This resource is yours, could you upsert it?
-    clever-operator->>Clever Cloud's API: Hi! I need this resource to be upserted!
-    Clever Cloud's API->>clever-operator: Of course! It is done!
-    clever-operator->>Clever Cloud's API: Hi! Could I have credentials to connect this resource?
-    Clever Cloud's API->>clever-operator: Those are credentials that you are looking for!
-    clever-operator->>Apiserver: Hi! I need to create a Secret with the following data!
-    Apiserver->>clever-operator: It is done, sir!
-    clever-operator->>Apiserver: The resource is created!
+    Apiserver->>clever-kubernetes-operator: This resource is yours, could you upsert it?
+    clever-kubernetes-operator->>Clever Cloud's API: Hi! I need this resource to be upserted!
+    Clever Cloud's API->>clever-kubernetes-operator: Of course! It is done!
+    clever-kubernetes-operator->>Clever Cloud's API: Hi! Could I have credentials to connect this resource?
+    Clever Cloud's API->>clever-kubernetes-operator: Those are credentials that you are looking for!
+    clever-kubernetes-operator->>Apiserver: Hi! I need to create a Secret with the following data!
+    Apiserver->>clever-kubernetes-operator: It is done, sir!
+    clever-kubernetes-operator->>Apiserver: The resource is created!
     Apiserver->>Jane Doe: Your resource is created!
 ```
 

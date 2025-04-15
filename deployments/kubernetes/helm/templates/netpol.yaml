@@ -3,12 +3,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: clever-operator
+  name: clever-kubernetes-operator
 {{ include "cleveroperator.namespace" . | indent 2 }}
 spec:
   podSelector:
     matchLabels:
-      app: clever-operator
+      app: clever-kubernetes-operator
   policyTypes:
     - Ingress
     - Egress

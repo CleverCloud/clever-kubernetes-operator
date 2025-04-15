@@ -1,10 +1,10 @@
-# Release the clever-operator
+# Release the clever-kubernetes-operator
 
 > This document will go through steps to release a new version of the operator
 
 ## Update operator-lifecycle-manager manifests
 
-> This part explains how to create manifests for the clever-operator on [OperatorHub](https://operatorhub.io/operator/clever-operator).
+> This part explains how to create manifests for the clever-kubernetes-operator on [OperatorHub](https://operatorhub.io/operator/clever-kubernetes-operator).
 
 ### Create operator-lifecycle-manager manifests for the new release
 
@@ -15,12 +15,12 @@ Once this is done, you will get something like below.
 deployments/operator-lifecycle-manager/bundle-<new-release>
 ├── bundle.Dockerfile
 ├── manifests
-│  ├── clever-operator-mongodb.crd.yaml
-│  ├── clever-operator-mysql.crd.yaml
-│  ├── clever-operator-postgresql.crd.yaml
-│  ├── clever-operator-pulsar.crd.yaml
-│  ├── clever-operator-redis.crd.yaml
-│  └── clever-operator.clusterserviceversion.yaml
+│  ├── clever-kubernetes-operator-mongodb.crd.yaml
+│  ├── clever-kubernetes-operator-mysql.crd.yaml
+│  ├── clever-kubernetes-operator-postgresql.crd.yaml
+│  ├── clever-kubernetes-operator-pulsar.crd.yaml
+│  ├── clever-kubernetes-operator-redis.crd.yaml
+│  └── clever-kubernetes-operator.clusterserviceversion.yaml
 ├── metadata
 │  └── annotations.yaml
 └── tests
@@ -28,7 +28,7 @@ deployments/operator-lifecycle-manager/bundle-<new-release>
       └── config.yaml
 ```
 
-You have to edit the file `clever-operator.clusterserviceversion.yaml` to update the `<latest-release>` in to the new version `<new-release>`
+You have to edit the file `clever-kubernetes-operator.clusterserviceversion.yaml` to update the `<latest-release>` in to the new version `<new-release>`
 and as well update docker image to the latest commit of the `main` branch.
 
 ### Update the continuous integration to build the new release
@@ -50,7 +50,7 @@ You will have to update the `Makefile` to bump the variable `OLM_VERSION` to the
 
 You have to update the Kubernetes' Deployment and helm charts with the latest docker image of the branch `main`. That's all!
 
-## Update a version of clever-operator
+## Update a version of clever-kubernetes-operator
 
 You will have to update the version of the project in the following file `Cargo.toml` which correspond to the Rust manifest.
 

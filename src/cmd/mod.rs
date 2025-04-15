@@ -97,9 +97,9 @@ pub enum Error {
 pub enum Command {
     #[clap(name = "custom-resource-definition", aliases = &["crd"], subcommand, about = "Interact with custom resource definition")]
     CustomResourceDefinition(crd::CustomResourceDefinition),
-    #[clap(name = "configmap", aliases = &["cm"], subcommand, about = "Generate configmap from clever-operator configuration")]
+    #[clap(name = "configmap", aliases = &["cm"], subcommand, about = "Generate configmap from clever-kubernetes-operator configuration")]
     ConfigMap(configmap::ConfigMap),
-    #[clap(name = "secret", aliases = &["s"], subcommand, about = "Generate secret from clever-operator configuration")]
+    #[clap(name = "secret", aliases = &["s"], subcommand, about = "Generate secret from clever-kubernetes-operator configuration")]
     Secret(secret::Secret),
 }
 

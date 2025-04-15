@@ -1,4 +1,4 @@
-# Default values for clever-operator.
+# Default values for clever-kubernetes-operator.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -12,7 +12,7 @@ networkPolicy:
 replicaCount: 1
 
 image:
-  repository: clevercloud/clever-operator
+  repository: clevercloud/clever-kubernetes-operator
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "38d856d984753a7cf6d406aaa1f5576b5cd26236"

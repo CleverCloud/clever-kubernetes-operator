@@ -1,5 +1,5 @@
 apiVersion: v2
-name: clever-operator
+name: clever-kubernetes-operator
 description: A kubernetes operator that expose clever cloud's resources through custom resource definition
 type: application
 version: 0.3.0

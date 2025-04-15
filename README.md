@@ -1,6 +1,6 @@
 # Clever operator
 
-[![Continuous integration](https://github.com/CleverCloud/clever-operator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/CleverCloud/clever-operator/actions/workflows/ci.yml)
+[![Continuous integration](https://github.com/CleverCloud/clever-kubernetes-operator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/CleverCloud/clever-kubernetes-operator/actions/workflows/ci.yml)
 
 > A kubernetes operator that exposes clever cloud's resources through custom resource definition
 
@@ -26,20 +26,20 @@ You will need some tools on your computer to build and deploy the operator, at l
 `docker`. To deploy the operator, you will also need the `kubectl` command and a `kubernetes` cluster.
 
 So, firstly, you will need to retrieve the source. You can clone them directly from
-[GitHub](https://github.com/CleverCloud/clever-operator) using the following command.
+[GitHub](https://github.com/CleverCloud/clever-kubernetes-operator) using the following command.
 
 ```
-$ git clone https://github.com/CleverCloud/clever-operator.git
+$ git clone https://github.com/CleverCloud/clever-kubernetes-operator.git
 ```
 or
 ```
-$ gh repo clone CleverCloud/clever-operator
+$ gh repo clone CleverCloud/clever-kubernetes-operator
 ```
 
 Then, you will need to go into the new created folder where are located the source code.
 
 ```
-$ cd clever-operator
+$ cd clever-kubernetes-operator
 ```
 
 At this step, you can choose to build the binary and use it directly or build the docker image and push it to your
@@ -53,10 +53,10 @@ To build the binary, you can use the following command:
 $ make build
 ```
 
-The operator binary will be located under the folder `target/release/clever-operator`. Then, you can run it.
+The operator binary will be located under the folder `target/release/clever-kubernetes-operator`. Then, you can run it.
 
 ```
-$ target/release/clever-operator
+$ target/release/clever-kubernetes-operator
 ```
 
 #### Build the docker image and deploy it
@@ -64,13 +64,13 @@ $ target/release/clever-operator
 To build the docker image, you can use the following command:
 
 ```
-$ DOCKER_IMG=<your-registry>/<your-namespace>/clever-operator:latest make docker-build
+$ DOCKER_IMG=<your-registry>/<your-namespace>/clever-kubernetes-operator:latest make docker-build
 ```
 
 Then, push it to your registry.
 
 ```
-$ DOCKER_IMG=<your-registry>/<your-namespace>/clever-operator:latest make docker-push
+$ DOCKER_IMG=<your-registry>/<your-namespace>/clever-kubernetes-operator:latest make docker-push
 ```
 
 Then, update the kubernetes deployment script located in `deployments/kubernetes/v1.24.0/20-deployment.yaml` to deploy
@@ -89,7 +89,7 @@ $ kubectl apply -f deployments/kubernetes/v1.30.0
 You can also use the available Helm chart. Configure the values.yaml file in `deployments/kubernetes/helm` with your own values, then run:
 
 ```console
-$ helm install clever-operator -n clever-operator --create-namespace -f values.yaml .
+$ helm install clever-kubernetes-operator -n clever-kubernetes-operator --create-namespace -f values.yaml .
 ```
 
 ### From dockerhub
@@ -102,8 +102,8 @@ $ make deploy-kubernetes
 ```
 or
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/CleverCloud/clever-operator/main/deployments/kubernetes/v1.30.0/10-custom-resource-definition.yaml
-$ kubectl apply -f https://raw.githubusercontent.com/CleverCloud/clever-operator/main/deployments/kubernetes/v1.30.0/20-deployment.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/CleverCloud/clever-kubernetes-operator/main/deployments/kubernetes/v1.30.0/10-custom-resource-definition.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/CleverCloud/clever-kubernetes-operator/main/deployments/kubernetes/v1.30.0/20-deployment.yaml
 ```
 
 ## Configuration
@@ -129,10 +129,10 @@ Environment variables are:
 By default, if the `--config` flag is not provided to the binary, the operator will look at the following paths to
 retrieve its configuration:
 
-- `/usr/share/clever-operator/config.{toml,yaml,json}`
-- `/etc/clever-operator/config.{toml,yaml,json}`
-- `$HOME/.config/clever-operator/config.{toml,yaml,json}`
-- `$HOME/.local/share/clever-operator/config.{toml,yaml,json}`
+- `/usr/share/clever-kubernetes-operator/config.{toml,yaml,json}`
+- `/etc/clever-kubernetes-operator/config.{toml,yaml,json}`
+- `$HOME/.config/clever-kubernetes-operator/config.{toml,yaml,json}`
+- `$HOME/.local/share/clever-kubernetes-operator/config.{toml,yaml,json}`
 - `config.{toml,yaml,json}`
 
 ## License

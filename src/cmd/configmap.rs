@@ -26,7 +26,7 @@ pub enum ConfigMapError {
 
 #[derive(Subcommand, Clone, Debug)]
 pub enum ConfigMap {
-    #[clap(name = "generate", aliases = &["g"], about = "Generate configmap from clever-operator configuration")]
+    #[clap(name = "generate", aliases = &["g"], about = "Generate configmap from clever-kubernetes-operator configuration")]
     Generate {
         #[clap(short = 'n', long = "name", help = "Name of the configmap")]
         name: Option<String>,

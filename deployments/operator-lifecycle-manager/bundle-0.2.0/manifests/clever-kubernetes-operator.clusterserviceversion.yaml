@@ -2,16 +2,16 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
-  name: cleveroperator.v0.1.0
-  namespace: clever-operator-system
+  name: cleveroperator.v0.2.0
+  namespace: clever-kubernetes-operator-system
   annotations:
     capabilities: Full Lifecycle
     categories: Developer Tools, Integration & Delivery, Cloud Provider
-    description: A kubernetes operator that expose clever cloud's resources through custom resource definition
     certified: "false"
-    containerImage: clevercloud/clever-operator:1b0cb6b80537bbec8e876593adb38facbbe782a9
+    description: A kubernetes operator that expose clever cloud's resources through custom resource definition
+    containerImage: clevercloud/clever-kubernetes-operator:7ad2ef2d6cadd99bbd9f5d8c885d913036c6d810
     createdAt: 2021-09-21T12:00:00.000Z
-    repository: https://github.com/CleverCloud/clever-operator
+    repository: https://github.com/CleverCloud/clever-kubernetes-operator
     "olm.properties": '[{"type": "olm.maxOpenShiftVersion", "value": "4.9"}]'
     alm-examples: |
       [{
@@ -33,9 +33,66 @@ metadata:
             "plan": "plan_xxxx"
           }
         }
+      }, {
+        "apiVersion": "api.clever-cloud.com/v1",
+        "kind": "Redis",
+        "metadata": {
+          "namespace": "default",
+          "name": "redis"
+        },
+        "status": {},
+        "spec": {
+          "organisation": "orga_xxxx",
+          "options": {
+            "version": 6010,
+            "encryption": true
+          },
+          "instance": {
+            "region": "par",
+            "plan": "plan_xxxx"
+          }
+        }
+      }, {
+        "apiVersion": "api.clever-cloud.com/v1",
+        "kind": "MySql",
+        "metadata": {
+          "namespace": "default",
+          "name": "mysql"
+        },
+        "status": {},
+        "spec": {
+          "organisation": "orga_xxxx",
+          "options": {
+            "version": 80,
+            "encryption": true
+          },
+          "instance": {
+            "region": "par",
+            "plan": "plan_xxxx"
+          }
+        }
+      }, {
+        "apiVersion": "api.clever-cloud.com/v1",
+        "kind": "MongoDb",
+        "metadata": {
+          "namespace": "default",
+          "name": "mongodb"
+        },
+        "status": {},
+        "spec": {
+          "organisation": "orga_xxxx",
+          "options": {
+            "version": 403,
+            "encryption": true
+          },
+          "instance": {
+            "region": "par",
+            "plan": "plan_xxxx"
+          }
+        }
       }]
 spec:
-  displayName: clever-operator
+  displayName: clever-kubernetes-operator
   description: A kubernetes operator that expose clever cloud's resources through custom resource definition
   minKubeVersion: v1.21.0
   icon:
@@ -44,7 +101,7 @@ spec:
   keywords: []
   links:
   - name: GitHub
-    url: https://github.com/CleverCloud/clever-operator
+    url: https://github.com/CleverCloud/clever-kubernetes-operator
   - name: Clever Cloud
     url: https://www.clever-cloud.com
   maintainers:
@@ -53,7 +110,7 @@ spec:
   maturity: alpha
   provider:
     name: Clever Cloud
-  version: 0.1.0
+  version: 0.2.0
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
@@ -62,6 +119,144 @@ spec:
       version: v1
       displayName: PostgreSql
       description: Clever Cloud's managed postgresql database
+      resources:
+      - kind: Secret
+        version: v1
+      specDescriptors:
+      - description: Instance options
+        displayName: Instance
+        path: instance
+      - description: Plan of the instance used to spawn the database
+        displayName: Plan
+        path: instance.plan
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Region of the instance used to spawn the database
+        displayName: Region
+        path: instance.region
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Options of the database
+        displayName: options
+        path: options
+      - description: Should the disk be encrypted?
+        displayName: Encryption
+        path: options.encryption
+        x-descriptors:
+        - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+      - description: Version of the database
+        displayName: Version
+        path: options.version
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Clever Cloud's organisation to spawn the database
+        displayName: Organisation
+        path: organisation
+        x-descriptors:
+        - urn:alm:descriptor:text
+      statusDescriptors:
+      - description: Clever Cloud's addon identifier
+        displayName: Addon
+        path: addon
+        x-descriptors:
+        - urn:alm:descriptor:text
+    - kind: Redis
+      name: redis.api.clever-cloud.com
+      version: v1
+      displayName: Redis
+      description: Clever Cloud's managed redis database
+      resources:
+      - kind: Secret
+        version: v1
+      specDescriptors:
+      - description: Instance options
+        displayName: Instance
+        path: instance
+      - description: Plan of the instance used to spawn the database
+        displayName: Plan
+        path: instance.plan
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Region of the instance used to spawn the database
+        displayName: Region
+        path: instance.region
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Options of the database
+        displayName: options
+        path: options
+      - description: Should the disk be encrypted?
+        displayName: Encryption
+        path: options.encryption
+        x-descriptors:
+        - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+      - description: Version of the database
+        displayName: Version
+        path: options.version
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Clever Cloud's organisation to spawn the database
+        displayName: Organisation
+        path: organisation
+        x-descriptors:
+        - urn:alm:descriptor:text
+      statusDescriptors:
+      - description: Clever Cloud's addon identifier
+        displayName: Addon
+        path: addon
+        x-descriptors:
+        - urn:alm:descriptor:text
+    - kind: MySql
+      name: mysqls.api.clever-cloud.com
+      version: v1
+      displayName: MySql
+      description: Clever Cloud's managed mysql database
+      resources:
+      - kind: Secret
+        version: v1
+      specDescriptors:
+      - description: Instance options
+        displayName: Instance
+        path: instance
+      - description: Plan of the instance used to spawn the database
+        displayName: Plan
+        path: instance.plan
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Region of the instance used to spawn the database
+        displayName: Region
+        path: instance.region
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Options of the database
+        displayName: options
+        path: options
+      - description: Should the disk be encrypted?
+        displayName: Encryption
+        path: options.encryption
+        x-descriptors:
+        - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
+      - description: Version of the database
+        displayName: Version
+        path: options.version
+        x-descriptors:
+        - urn:alm:descriptor:text
+      - description: Clever Cloud's organisation to spawn the database
+        displayName: Organisation
+        path: organisation
+        x-descriptors:
+        - urn:alm:descriptor:text
+      statusDescriptors:
+      - description: Clever Cloud's addon identifier
+        displayName: Addon
+        path: addon
+        x-descriptors:
+        - urn:alm:descriptor:text
+    - kind: MongoDb
+      name: mongodbs.api.clever-cloud.com
+      version: v1
+      displayName: MongoDb
+      description: Clever Cloud's managed mongodb database
       resources:
       - kind: Secret
         version: v1
@@ -115,7 +310,7 @@ spec:
   install:
     strategy: deployment
     permissions:
-    - serviceAccountName: clever-operator
+    - serviceAccountName: clever-kubernetes-operator
       rules:
       - apiGroups: [""]
         resources: ["secrets", "events"]
@@ -125,22 +320,22 @@ spec:
         verbs: ["*"]
     spec:
       deployments:
-      - name: clever-operator
+      - name: clever-kubernetes-operator
         spec:
           replicas: 1
           selector:
             matchLabels:
-              app: clever-operator
+              app: clever-kubernetes-operator
           template:
             metadata:
               labels:
-                app: clever-operator
+                app: clever-kubernetes-operator
             spec:
               containers:
-                - image: clevercloud/clever-operator:1b0cb6b80537bbec8e876593adb38facbbe782a9
+                - image: clevercloud/clever-kubernetes-operator:7ad2ef2d6cadd99bbd9f5d8c885d913036c6d810
                   imagePullPolicy: Always
-                  name: clever-operator
-                  command: ["/usr/local/bin/clever-operator"]
+                  name: clever-kubernetes-operator
+                  command: ["/usr/local/bin/clever-kubernetes-operator"]
                   args: ["-vvvvvvv"]
                   resources:
                     requests:

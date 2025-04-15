@@ -1,6 +1,6 @@
 FROM redhat/ubi9:latest AS builder
 
-WORKDIR /usr/src/clever-operator
+WORKDIR /usr/src/clever-kubernetes-operator
 ADD src src
 ADD Cargo.toml .
 ADD Cargo.lock .
@@ -12,8 +12,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --verbo
 
 FROM redhat/ubi9:latest
 
-MAINTAINER Florentin Dubois <florentin.dubois@clever-cloud.com>
-LABEL name="clever-operator" \
+LABEL name="clever-kubernetes-operator" \
     maintainer="Florentin Dubois <florentin.dubois@clever-cloud.com>" \
     vendor="Clever Cloud S.A.S" \
     version="v0.6.0" \
@@ -24,6 +23,6 @@ LABEL name="clever-operator" \
 RUN groupadd -g 25000 clever && useradd -u 20000 clever -g clever
 USER clever:clever
 
-COPY --from=builder /usr/src/clever-operator/target/release/clever-operator /usr/local/bin
+COPY --from=builder /usr/src/clever-kubernetes-operator/target/release/clever-kubernetes-operator /usr/local/bin
 ADD LICENSE licenses/LICENSE
-CMD [ "/usr/local/bin/clever-operator" ]
+CMD [ "/usr/local/bin/clever-kubernetes-operator" ]

@@ -3,14 +3,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
 {{ include "cleveroperator.namespace" . | indent 2 }}
-  name: clever-operator
+  name: clever-kubernetes-operator
   labels:
-    app: clever-operator
+    app: clever-kubernetes-operator
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: clever-operator
+      app: clever-kubernetes-operator
   template:
     metadata:
       annotations:
@@ -20,26 +20,26 @@ spec:
         {{ toYaml .Values.podAnnotations | nindent 8 }}
     {{- end }}
       labels:
-        app: clever-operator
+        app: clever-kubernetes-operator
     spec:
-      serviceAccountName: clever-operator
+      serviceAccountName: clever-kubernetes-operator
       automountServiceAccountToken: true
       volumes:
       - name: config
         configMap:
-          name: clever-operator-configuration
+          name: clever-kubernetes-operator-configuration
           items:
           - key: "config.toml"
             path: "config.toml"
       containers:
         - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          name: clever-operator
-          command: ["/usr/local/bin/clever-operator"]
+          name: clever-kubernetes-operator
+          command: ["/usr/local/bin/clever-kubernetes-operator"]
           args: ["-vvvvvvv"]
           volumeMounts:
           - name: config
-            mountPath: "/etc/clever-operator"
+            mountPath: "/etc/clever-kubernetes-operator"
             readOnly: true
           resources:
 {{ toYaml .Values.resources | indent 12 }}

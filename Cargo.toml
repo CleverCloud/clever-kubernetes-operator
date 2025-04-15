@@ -1,14 +1,14 @@
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [package]
-name = "clever-operator"
+name = "clever-kubernetes-operator"
 description = "A kubernetes operator that expose clever cloud's resources through custom resource definition"
 version = "0.7.0"
 edition = "2024"
 rust-version = "1.85.0"
 authors = ["Florentin Dubois <florentin.dubois@clever-cloud.com>"]
 license-file = "LICENSE"
-repository = "https://github.com/CleverCloud/clever-operator"
+repository = "https://github.com/CleverCloud/clever-kubernetes-operator"
 readme = "README.md"
 keywords = ["kubernetes", "operator", "clevercloud", "openshift"]
 
