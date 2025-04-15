@@ -1,4 +1,4 @@
-# Clever operator
+# Clever kubernetes operator
 
 [![Continuous integration](https://github.com/CleverCloud/clever-kubernetes-operator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/CleverCloud/clever-kubernetes-operator/actions/workflows/ci.yml)
 
