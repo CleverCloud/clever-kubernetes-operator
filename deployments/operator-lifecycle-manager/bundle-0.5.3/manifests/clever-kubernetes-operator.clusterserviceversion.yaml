@@ -2,16 +2,16 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
-  name: cleveroperator.v0.5.1
-  namespace: clever-operator-system
+  name: cleveroperator.v0.5.3
+  namespace: clever-kubernetes-operator-system
   annotations:
     capabilities: Full Lifecycle
     categories: Developer Tools, Integration & Delivery, Cloud Provider
     description: A kubernetes operator that expose clever cloud's resources through custom resource definition
     certified: "false"
-    containerImage: clevercloud/clever-operator:c00666a3f9911221a313a3f387d9561f77da0384
+    containerImage: docker.io/clevercloud/clever-kubernetes-operator:e7cfe6efc4c4da80c722416fe1de373b789612f6
     createdAt: 2021-09-21T12:00:00.000Z
-    repository: https://github.com/CleverCloud/clever-operator
+    repository: https://github.com/CleverCloud/clever-kubernetes-operator
     alm-examples: |
       [{
         "apiVersion": "api.clever-cloud.com/v1",
@@ -133,7 +133,7 @@ metadata:
         }
       }]
 spec:
-  displayName: clever-operator
+  displayName: clever-kubernetes-operator
   description: A kubernetes operator that expose clever cloud's resources through custom resource definition
   minKubeVersion: v1.21.0
   icon:
@@ -142,7 +142,7 @@ spec:
   keywords: []
   links:
   - name: GitHub
-    url: https://github.com/CleverCloud/clever-operator
+    url: https://github.com/CleverCloud/clever-kubernetes-operator
   - name: Clever Cloud
     url: https://www.clever-cloud.com
   maintainers:
@@ -151,10 +151,10 @@ spec:
   maturity: alpha
   provider:
     name: Clever Cloud
-  version: 0.5.1
+  version: 0.5.3
   relatedImages:
-  - name: clever-operator
-    image: clevercloud/clever-operator:c00666a3f9911221a313a3f387d9561f77da0384
+  - name: clever-kubernetes-operator
+    image: docker.io/clevercloud/clever-kubernetes-operator:e7cfe6efc4c4da80c722416fe1de373b789612f6
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
@@ -459,7 +459,7 @@ spec:
   install:
     strategy: deployment
     permissions:
-    - serviceAccountName: clever-operator
+    - serviceAccountName: clever-kubernetes-operator
       rules:
       - apiGroups: [""]
         resources: ["secrets", "events"]
@@ -469,22 +469,22 @@ spec:
         verbs: ["*"]
     spec:
       deployments:
-      - name: clever-operator
+      - name: clever-kubernetes-operator
         spec:
           replicas: 1
           selector:
             matchLabels:
-              app: clever-operator
+              app: clever-kubernetes-operator
           template:
             metadata:
               labels:
-                app: clever-operator
+                app: clever-kubernetes-operator
             spec:
               containers:
-                - image: clevercloud/clever-operator:c00666a3f9911221a313a3f387d9561f77da0384
+                - image: docker.io/clevercloud/clever-kubernetes-operator:e7cfe6efc4c4da80c722416fe1de373b789612f6
                   imagePullPolicy: Always
-                  name: clever-operator
-                  command: ["/usr/local/bin/clever-operator"]
+                  name: clever-kubernetes-operator
+                  command: ["/usr/local/bin/clever-kubernetes-operator"]
                   args: ["-vvvvvvv"]
                   resources:
                     requests:

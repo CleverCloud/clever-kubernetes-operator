@@ -14,4 +14,4 @@ spec:
     region: par
     plan: dev
 
-See https://github.com/CleverCloud/clever-operator/blob/main/docs/40-custom-resources.md for more information and configuration options
+See https://github.com/CleverCloud/clever-kubernetes-operator/blob/main/docs/40-custom-resources.md for more information and configuration options

@@ -2,16 +2,16 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
-  name: cleveroperator.v0.7.0
-  namespace: clever-operator-system
+  name: cleveroperator.v0.6.0
+  namespace: clever-kubernetes-operator-system
   annotations:
     capabilities: Full Lifecycle
     categories: Developer Tools, Integration & Delivery, Cloud Provider
     description: A kubernetes operator that expose clever cloud's resources through custom resource definition
     certified: "false"
-    containerImage: docker.io/clevercloud/clever-operator:38d856d984753a7cf6d406aaa1f5576b5cd26236
-    createdAt: 2025-03-31T13:48:00.000Z
-    repository: https://github.com/CleverCloud/clever-operator
+    containerImage: docker.io/clevercloud/clever-kubernetes-operator:ca53fedf01d1f813df6f061ef511b6e576084531
+    createdAt: 2021-09-21T12:00:00.000Z
+    repository: https://github.com/CleverCloud/clever-kubernetes-operator
     alm-examples: |
       [{
         "apiVersion": "api.clever-cloud.com/v1",
@@ -144,93 +144,9 @@ metadata:
             "region": "par"
           }
         }
-      }, {
-        "apiVersion": "api.clever-cloud.com/v1",
-        "kind": "Keycloak",
-        "metadata": {
-          "namespace": "default",
-          "name": "keycloak"
-        },
-        "spec": {
-          "organisation": "orga_xxxx",
-          "instance": {
-            "region": "par",
-            "plan": "base"
-          }
-        }
-      }, {
-        "apiVersion": "api.clever-cloud.com/v1",
-        "kind": "Matomo",
-        "metadata": {
-          "namespace": "default",
-          "name": "matomo"
-        },
-        "spec": {
-          "organisation": "orga_xxxx",
-          "instance": {
-            "region": "par",
-            "plan": "beta"
-          }
-        }
-      }, {
-        "apiVersion": "api.clever-cloud.com/v1",
-        "kind": "Metabase",
-        "metadata": {
-          "namespace": "default",
-          "name": "metabase"
-        },
-        "spec": {
-          "organisation": "orga_xxxx",
-          "instance": {
-            "region": "par",
-            "plan": "base"
-          }
-        }
-      }, {
-        "apiVersion": "api.clever-cloud.com/v1",
-        "kind": "Azimutt",
-        "metadata": {
-          "namespace": "default",
-          "name": "azimutt"
-        },
-        "spec": {
-          "organisation": "orga_xxxx",
-          "instance": {
-            "region": "par",
-            "plan": "free"
-          }
-        }
-      }, {
-        "apiVersion": "api.clever-cloud.com/v1",
-        "kind": "Cellar",
-        "metadata": {
-          "namespace": "default",
-          "name": "cellar"
-        },
-        "spec": {
-          "organisation": "orga_xxxx",
-          "instance": {
-            "region": "par",
-            "plan": "s"
-          }
-        }
-      }, {
-        "apiVersion": "api.clever-cloud.com/v1",
-        "kind": "Otoroshi",
-        "metadata": {
-          "namespace": "default",
-          "name": "otoroshi"
-        },
-        "spec": {
-          "organisation": "orga_xxxx",
-          "instance": {
-            "region": "par",
-            "plan": "base"
-          }
-        }
       }]
 spec:
-  displayName: clever-operator
+  displayName: clever-kubernetes-operator
   description: A kubernetes operator that expose clever cloud's resources through custom resource definition
   minKubeVersion: v1.30.0
   icon:
@@ -239,7 +155,7 @@ spec:
   keywords: []
   links:
   - name: GitHub
-    url: https://github.com/CleverCloud/clever-operator
+    url: https://github.com/CleverCloud/clever-kubernetes-operator
   - name: Clever Cloud
     url: https://www.clever-cloud.com
   maintainers:
@@ -248,10 +164,10 @@ spec:
   maturity: alpha
   provider:
     name: Clever Cloud
-  version: 0.7.0
+  version: 0.6.0
   relatedImages:
-  - name: clever-operator
-    image: docker.io/clevercloud/clever-operator:38d856d984753a7cf6d406aaa1f5576b5cd26236
+  - name: clever-kubernetes-operator
+    image: docker.io/clevercloud/clever-kubernetes-operator:ca53fedf01d1f813df6f061ef511b6e576084531
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
@@ -572,234 +488,6 @@ spec:
           path: addon
           x-descriptors:
             - urn:alm:descriptor:text
-    - kind: Azimutt
-      name: azimutts.api.clever-cloud.com
-      version: v1
-      displayName: Azimutt
-      description: Clever Cloud's azimutt integration
-      resources:
-        - kind: Secret
-          version: v1
-      specDescriptors:
-        - description: Instance options
-          displayName: Instance
-          path: instance
-        - description: Region of the instance used to spawn the service
-          displayName: Region
-          path: instance.region
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Plan of the instance used to spawn the service
-          displayName: Plan
-          path: instance.plan
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's organisation to spawn the service
-          displayName: Organisation
-          path: organisation
-          x-descriptors:
-            - urn:alm:descriptor:text
-      statusDescriptors:
-        - description: Clever Cloud's addon identifier
-          displayName: Addon
-          path: addon
-          x-descriptors:
-            - urn:alm:descriptor:text
-    - kind: Cellar
-      name: cellars.api.clever-cloud.com
-      version: v1
-      displayName: Cellar
-      description: Clever Cloud's cellar integration
-      resources:
-        - kind: Secret
-          version: v1
-      specDescriptors:
-        - description: Instance options
-          displayName: Instance
-          path: instance
-        - description: Region of the instance used to spawn the service
-          displayName: Region
-          path: instance.region
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Plan of the instance used to spawn the service
-          displayName: Plan
-          path: instance.plan
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's organisation to spawn the service
-          displayName: Organisation
-          path: organisation
-          x-descriptors:
-            - urn:alm:descriptor:text
-      statusDescriptors:
-        - description: Clever Cloud's addon identifier
-          displayName: Addon
-          path: addon
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's cellar URL
-          displayName: URL
-          path: url
-          x-descriptors:
-            - urn:alm:descriptor:text
-    - kind: Keycloak
-      name: keycloaks.api.clever-cloud.com
-      version: v1
-      displayName: Keycloak
-      description: Clever Cloud's keycloak integration
-      resources:
-        - kind: Secret
-          version: v1
-      specDescriptors:
-        - description: Instance options
-          displayName: Instance
-          path: instance
-        - description: Region of the instance used to spawn the service
-          displayName: Region
-          path: instance.region
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Plan of the instance used to spawn the service
-          displayName: Plan
-          path: instance.plan
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's organisation to spawn the service
-          displayName: Organisation
-          path: organisation
-          x-descriptors:
-            - urn:alm:descriptor:text
-      statusDescriptors:
-        - description: Clever Cloud's addon identifier
-          displayName: Addon
-          path: addon
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's keycloak URL
-          displayName: URL
-          path: url
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's keycloak admin URL
-          displayName: Admin URL
-          path: admin_url
-          x-descriptors:
-            - urn:alm:descriptor:text
-    - kind: Matomo
-      name: matomos.api.clever-cloud.com
-      version: v1
-      displayName: Matomo
-      description: Clever Cloud's matomo integration
-      resources:
-        - kind: Secret
-          version: v1
-      specDescriptors:
-        - description: Instance options
-          displayName: Instance
-          path: instance
-        - description: Region of the instance used to spawn the service
-          displayName: Region
-          path: instance.region
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Plan of the instance used to spawn the service
-          displayName: Plan
-          path: instance.plan
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's organisation to spawn the service
-          displayName: Organisation
-          path: organisation
-          x-descriptors:
-            - urn:alm:descriptor:text
-      statusDescriptors:
-        - description: Clever Cloud's addon identifier
-          displayName: Addon
-          path: addon
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's matomo URL
-          displayName: URL
-          path: url
-          x-descriptors:
-            - urn:alm:descriptor:text
-    - kind: Metabase
-      name: metabases.api.clever-cloud.com
-      version: v1
-      displayName: Metabase
-      description: Clever Cloud's metabase integration
-      resources:
-        - kind: Secret
-          version: v1
-      specDescriptors:
-        - description: Instance options
-          displayName: Instance
-          path: instance
-        - description: Region of the instance used to spawn the service
-          displayName: Region
-          path: instance.region
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Plan of the instance used to spawn the service
-          displayName: Plan
-          path: instance.plan
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's organisation to spawn the service
-          displayName: Organisation
-          path: organisation
-          x-descriptors:
-            - urn:alm:descriptor:text
-      statusDescriptors:
-        - description: Clever Cloud's addon identifier
-          displayName: Addon
-          path: addon
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's metabase URL
-          displayName: URL
-          path: url
-          x-descriptors:
-            - urn:alm:descriptor:text
-    - kind: Otoroshi
-      name: otoroshis.api.clever-cloud.com
-      version: v1
-      displayName: Otoroshi
-      description: Clever Cloud's otoroshi integration
-      resources:
-        - kind: Secret
-          version: v1
-      specDescriptors:
-        - description: Instance options
-          displayName: Instance
-          path: instance
-        - description: Region of the instance used to spawn the service
-          displayName: Region
-          path: instance.region
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Plan of the instance used to spawn the service
-          displayName: Plan
-          path: instance.plan
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's organisation to spawn the service
-          displayName: Organisation
-          path: organisation
-          x-descriptors:
-            - urn:alm:descriptor:text
-      statusDescriptors:
-        - description: Clever Cloud's addon identifier
-          displayName: Addon
-          path: addon
-          x-descriptors:
-            - urn:alm:descriptor:text
-        - description: Clever Cloud's otoroshi URL
-          displayName: URL
-          path: url
-          x-descriptors:
-            - urn:alm:descriptor:text
   installModes:
   - supported: true
     type: OwnNamespace
@@ -812,7 +500,7 @@ spec:
   install:
     strategy: deployment
     permissions:
-    - serviceAccountName: clever-operator
+    - serviceAccountName: clever-kubernetes-operator
       rules:
       - apiGroups: [""]
         resources: ["secrets", "events"]
@@ -822,22 +510,22 @@ spec:
         verbs: ["*"]
     spec:
       deployments:
-      - name: clever-operator
+      - name: clever-kubernetes-operator
         spec:
           replicas: 1
           selector:
             matchLabels:
-              app: clever-operator
+              app: clever-kubernetes-operator
           template:
             metadata:
               labels:
-                app: clever-operator
+                app: clever-kubernetes-operator
             spec:
               containers:
-                - image: docker.io/clevercloud/clever-operator:38d856d984753a7cf6d406aaa1f5576b5cd26236
+                - image: docker.io/clevercloud/clever-kubernetes-operator:ca53fedf01d1f813df6f061ef511b6e576084531
                   imagePullPolicy: Always
-                  name: clever-operator
-                  command: ["/usr/local/bin/clever-operator"]
+                  name: clever-kubernetes-operator
+                  command: ["/usr/local/bin/clever-kubernetes-operator"]
                   args: ["-vvvvvvv"]
                   resources:
                     requests:

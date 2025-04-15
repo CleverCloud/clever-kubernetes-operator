@@ -2,17 +2,16 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
-  name: cleveroperator.v0.3.1
-  namespace: clever-operator-system
+  name: cleveroperator.v0.4.0
+  namespace: clever-kubernetes-operator-system
   annotations:
     capabilities: Full Lifecycle
     categories: Developer Tools, Integration & Delivery, Cloud Provider
-    certified: "false"
-    containerImage: clevercloud/clever-operator:d5b80aa746ce6ada80e60f9b384b1383cddc695b
     description: A kubernetes operator that expose clever cloud's resources through custom resource definition
+    certified: "false"
+    containerImage: clevercloud/clever-kubernetes-operator:5821576632c9d524a3f1c419b86346823033c282
     createdAt: 2021-09-21T12:00:00.000Z
-    repository: https://github.com/CleverCloud/clever-operator
-    "olm.properties": '[{"type": "olm.maxOpenShiftVersion", "value": "4.9"}]'
+    repository: https://github.com/CleverCloud/clever-kubernetes-operator
     alm-examples: |
       [{
         "apiVersion": "api.clever-cloud.com/v1",
@@ -21,7 +20,6 @@ metadata:
           "namespace": "default",
           "name": "postgresql"
         },
-        "status": {},
         "spec": {
           "organisation": "orga_xxxx",
           "options": {
@@ -40,7 +38,6 @@ metadata:
           "namespace": "default",
           "name": "redis"
         },
-        "status": {},
         "spec": {
           "organisation": "orga_xxxx",
           "options": {
@@ -59,7 +56,6 @@ metadata:
           "namespace": "default",
           "name": "mysql"
         },
-        "status": {},
         "spec": {
           "organisation": "orga_xxxx",
           "options": {
@@ -78,7 +74,6 @@ metadata:
           "namespace": "default",
           "name": "mongodb"
         },
-        "status": {},
         "spec": {
           "organisation": "orga_xxxx",
           "options": {
@@ -97,7 +92,6 @@ metadata:
           "namespace": "default",
           "name": "pulsar"
         },
-        "status": {},
         "spec": {
           "organisation": "orga_xxxx",
           "instance": {
@@ -106,7 +100,7 @@ metadata:
         }
       }]
 spec:
-  displayName: clever-operator
+  displayName: clever-kubernetes-operator
   description: A kubernetes operator that expose clever cloud's resources through custom resource definition
   minKubeVersion: v1.21.0
   icon:
@@ -115,7 +109,7 @@ spec:
   keywords: []
   links:
   - name: GitHub
-    url: https://github.com/CleverCloud/clever-operator
+    url: https://github.com/CleverCloud/clever-kubernetes-operator
   - name: Clever Cloud
     url: https://www.clever-cloud.com
   maintainers:
@@ -124,7 +118,10 @@ spec:
   maturity: alpha
   provider:
     name: Clever Cloud
-  version: 0.3.1
+  version: 0.4.0
+  relatedImages:
+  - name: clever-kubernetes-operator
+    image: clevercloud/clever-kubernetes-operator:5821576632c9d524a3f1c419b86346823033c282
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
@@ -352,7 +349,7 @@ spec:
   install:
     strategy: deployment
     permissions:
-    - serviceAccountName: clever-operator
+    - serviceAccountName: clever-kubernetes-operator
       rules:
       - apiGroups: [""]
         resources: ["secrets", "events"]
@@ -362,22 +359,22 @@ spec:
         verbs: ["*"]
     spec:
       deployments:
-      - name: clever-operator
+      - name: clever-kubernetes-operator
         spec:
           replicas: 1
           selector:
             matchLabels:
-              app: clever-operator
+              app: clever-kubernetes-operator
           template:
             metadata:
               labels:
-                app: clever-operator
+                app: clever-kubernetes-operator
             spec:
               containers:
-                - image: clevercloud/clever-operator:d5b80aa746ce6ada80e60f9b384b1383cddc695b
+                - image: clevercloud/clever-kubernetes-operator:5821576632c9d524a3f1c419b86346823033c282
                   imagePullPolicy: Always
-                  name: clever-operator
-                  command: ["/usr/local/bin/clever-operator"]
+                  name: clever-kubernetes-operator
+                  command: ["/usr/local/bin/clever-kubernetes-operator"]
                   args: ["-vvvvvvv"]
                   resources:
                     requests:

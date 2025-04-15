@@ -60,7 +60,7 @@ metadata) on kubernetes. You will first need to build a docker image of the curr
 default the ci will do that for you and then run the command below.
 
 ```
-$ operator-sdk run bundle --verbose --timeout 10m docker.io/clevercloud/clever-operator-manifest:<githash>
+$ operator-sdk run bundle --verbose --timeout 10m docker.io/clevercloud/clever-kubernetes-operator-manifest:<githash>
 ```
 
 During the deployment, you should have some terminal instances running with the following commands

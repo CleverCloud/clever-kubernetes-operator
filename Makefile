@@ -4,7 +4,7 @@ PWD					?= $(shell pwd)
 DIST				?= $(PWD)/target/release
 BIN_DIR				?= $(HOME)/.local/bin
 
-NAME				?= clever-operator
+NAME				?= clever-kubernetes-operator
 VERSION				?= $(shell git describe --candidates 1 --tags HEAD 2>/dev/null || echo HEAD)
 
 DOCKER				?= $(shell which docker)
@@ -70,49 +70,49 @@ docker-push: docker-build
 # ------------------------------------------------------------------------------
 # Kubernetes deployment
 .PHONY: crd
-crd: build $(DEPLOY_OLM)/manifests/clever-operator-pulsar.crd.yaml $(DEPLOY_KUBE)/10-custom-resource-definition.yaml $(DEPLOY_OLM)/manifests/clever-operator-mongodb.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-mysql.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-postgresql.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-redis.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-matomo.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-metabase.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-keycloak.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-otoroshi.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-cellar.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-azimutt.crd.yaml
+crd: build $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-pulsar.crd.yaml $(DEPLOY_KUBE)/10-custom-resource-definition.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mongodb.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mysql.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-postgresql.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-redis.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-matomo.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-elasticsearch.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-config-provider.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-metabase.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-keycloak.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-otoroshi.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-cellar.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-azimutt.crd.yaml
 
 $(DEPLOY_KUBE)/10-custom-resource-definition.yaml:
 	$(DIST)/$(NAME) custom-resource-definition view > $(DEPLOY_KUBE)/10-custom-resource-definition.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-postgresql.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view postgresql > $(DEPLOY_OLM)/manifests/clever-operator-postgresql.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-postgresql.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view postgresql > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-postgresql.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-redis.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view redis > $(DEPLOY_OLM)/manifests/clever-operator-redis.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-redis.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view redis > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-redis.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-mysql.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view mysql > $(DEPLOY_OLM)/manifests/clever-operator-mysql.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mysql.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view mysql > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mysql.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-mongodb.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view mongodb > $(DEPLOY_OLM)/manifests/clever-operator-mongodb.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mongodb.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view mongodb > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mongodb.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-pulsar.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view pulsar > $(DEPLOY_OLM)/manifests/clever-operator-pulsar.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-pulsar.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view pulsar > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-pulsar.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view elasticsearch > $(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-elasticsearch.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view elasticsearch > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-elasticsearch.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view config-provider > $(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-config-provider.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view config-provider > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-config-provider.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-metabase.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view metabase > $(DEPLOY_OLM)/manifests/clever-operator-metabase.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-metabase.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view metabase > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-metabase.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-keycloak.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view keycloak > $(DEPLOY_OLM)/manifests/clever-operator-keycloak.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-keycloak.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view keycloak > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-keycloak.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-otoroshi.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view otoroshi > $(DEPLOY_OLM)/manifests/clever-operator-otoroshi.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-otoroshi.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view otoroshi > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-otoroshi.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-cellar.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view cellar > $(DEPLOY_OLM)/manifests/clever-operator-cellar.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-cellar.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view cellar > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-cellar.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-azimutt.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view azimutt > $(DEPLOY_OLM)/manifests/clever-operator-azimutt.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-azimutt.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view azimutt > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-azimutt.crd.yaml
 
-$(DEPLOY_OLM)/manifests/clever-operator-matomo.crd.yaml:
-	$(DIST)/$(NAME) custom-resource-definition view matomo > $(DEPLOY_OLM)/manifests/clever-operator-matomo.crd.yaml
+$(DEPLOY_OLM)/manifests/clever-kubernetes-operator-matomo.crd.yaml:
+	$(DIST)/$(NAME) custom-resource-definition view matomo > $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-matomo.crd.yaml
 
 .PHONY: validate
 validate: $(shell $(FIND) . -type f -name '*.yaml')
@@ -127,23 +127,23 @@ deploy-kubernetes-crd: crd validate $(DEPLOY_KUBE)/10-custom-resource-definition
 
 .PHONY: deploy-kubernetes
 deploy-kubernetes: crd validate deploy-kubernete-crd
-	$(KUBE) apply -f $(DEPLOY_KUBE)/manifests/clever-operator.clusterserviceversion.yaml
+	$(KUBE) apply -f $(DEPLOY_KUBE)/manifests/clever-kubernetes-operator.clusterserviceversion.yaml
 
 .PHONY: deploy-olm-crd
-deploy-olm-crd: crd $(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-postgresql.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-redis.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-mysql.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-mongodb.crd.yaml $(DEPLOY_OLM)/manifests/clever-operator-pulsar.crd.yaml validate
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-postgresql.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-redis.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-mysql.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-mongodb.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-pulsar.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-config-provider.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-elasticsearch.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-otoroshi.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-cellar.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-azimutt.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-metabase.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-keycloak.crd.yaml
-	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-operator-matomo.crd.yaml
+deploy-olm-crd: crd $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-elasticsearch.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-config-provider.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-postgresql.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-redis.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mysql.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mongodb.crd.yaml $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-pulsar.crd.yaml validate
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-postgresql.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-redis.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mysql.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-mongodb.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-pulsar.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-config-provider.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-elasticsearch.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-otoroshi.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-cellar.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-azimutt.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-metabase.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-keycloak.crd.yaml
+	$(KUBE) apply -f $(DEPLOY_OLM)/manifests/clever-kubernetes-operator-matomo.crd.yaml
 
 .PHONY: deploy-olm
 deploy-olm: crd validate deploy-olm-crd

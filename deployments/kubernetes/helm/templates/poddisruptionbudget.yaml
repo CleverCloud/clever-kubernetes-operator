@@ -3,11 +3,11 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: clever-operator
+  name: clever-kubernetes-operator
 {{ include "cleveroperator.namespace" . | indent 2 }}
 spec:
   minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
   selector:
     matchLabels:
-      app: clever-operator
+      app: clever-kubernetes-operator
 {{- end }}

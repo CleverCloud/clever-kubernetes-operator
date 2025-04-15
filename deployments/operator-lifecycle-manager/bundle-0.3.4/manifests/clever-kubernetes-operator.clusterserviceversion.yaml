@@ -2,16 +2,17 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
-  name: cleveroperator.v0.5.0
-  namespace: clever-operator-system
+  name: cleveroperator.v0.3.4
+  namespace: clever-kubernetes-operator-system
   annotations:
     capabilities: Full Lifecycle
     categories: Developer Tools, Integration & Delivery, Cloud Provider
     description: A kubernetes operator that expose clever cloud's resources through custom resource definition
     certified: "false"
-    containerImage: clevercloud/clever-operator:5479ce18039bea686c167939eb77a2bc370a0e85
+    containerImage: clevercloud/clever-kubernetes-operator:1680db2488c8be856caea616512caffe6ff86707
     createdAt: 2021-09-21T12:00:00.000Z
-    repository: https://github.com/CleverCloud/clever-operator
+    repository: https://github.com/CleverCloud/clever-kubernetes-operator
+    "olm.properties": '[{"type": "olm.maxOpenShiftVersion", "value": "4.9"}]'
     alm-examples: |
       [{
         "apiVersion": "api.clever-cloud.com/v1",
@@ -98,42 +99,9 @@ metadata:
             "region": "par"
           }
         }
-      }, {
-        "apiVersion": "api.clever-cloud.com/v1",
-        "kind": "ConfigProvider",
-        "metadata": {
-          "namespace": "default",
-          "name": "config-provider"
-        },
-        "spec": {
-          "organisation": "orga_xxxx",
-          "variables": {
-            "ENV_VAR": "VALUE"
-          }
-        }
-      }, {
-        "apiVersion": "api.clever-cloud.com/v1",
-        "kind": "ElasticSearch",
-        "metadata": {
-          "namespace": "default",
-          "name": "elasticsearch"
-        },
-        "spec": {
-          "organisation": "orga_xxxx",
-          "instance": {
-            "region": "par",
-            "plan": "s",
-          },
-          "options": {
-            "version": 7,
-            "encryption": true,
-            "kibana": true,
-            "apm": true,
-          }
-        }
       }]
 spec:
-  displayName: clever-operator
+  displayName: clever-kubernetes-operator
   description: A kubernetes operator that expose clever cloud's resources through custom resource definition
   minKubeVersion: v1.21.0
   icon:
@@ -142,7 +110,7 @@ spec:
   keywords: []
   links:
   - name: GitHub
-    url: https://github.com/CleverCloud/clever-operator
+    url: https://github.com/CleverCloud/clever-kubernetes-operator
   - name: Clever Cloud
     url: https://www.clever-cloud.com
   maintainers:
@@ -151,10 +119,7 @@ spec:
   maturity: alpha
   provider:
     name: Clever Cloud
-  version: 0.5.0
-  relatedImages:
-  - name: clever-operator
-    image: clevercloud/clever-operator:5479ce18039bea686c167939eb77a2bc370a0e85
+  version: 0.3.4
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
@@ -370,83 +335,6 @@ spec:
         path: addon
         x-descriptors:
         - urn:alm:descriptor:text
-    - kind: ConfigProvider
-      name: configproviders.api.clever-cloud.com
-      version: v1
-      displayName: ConfigProvider
-      description: Clever Cloud's configuration provider addon
-      resources:
-      - kind: Secret
-        version: v1
-      specDescriptors:
-      - description: Clever Cloud's organisation to spawn the database
-        displayName: Organisation
-        path: organisation
-        x-descriptors:
-        - urn:alm:descriptor:text
-      - description: Key-Value of environment variables to expose
-        displayName: Variables
-        path: variables
-        x-descriptios:
-        - urn:ulm:descriptor:object
-      statusDescriptors:
-      - description: Clever Cloud's addon identifier
-        displayName: Addon
-        path: addon
-        x-descriptors:
-        - urn:alm:descriptor:text
-    - kind: ElasticSearch
-      name: elasticsearches.api.clever-cloud.com
-      version: v1
-      displayName: ElasticSearch
-      description: Clever Cloud's managed elasticsearch indexes
-      resources:
-      - kind: Secret
-        version: v1
-      specDescriptors:
-      - description: Instance options
-        displayName: Instance
-        path: instance
-      - description: Plan of the instance used to spawn the database
-        displayName: Plan
-        path: instance.plan
-        x-descriptors:
-        - urn:alm:descriptor:text
-      - description: Region of the instance used to spawn the database
-        displayName: Region
-        path: instance.region
-        x-descriptors:
-        - urn:alm:descriptor:text
-      - description: Options of the database
-        displayName: options
-        path: options
-      - description: Should the disk be encrypted?
-        displayName: Encryption
-        path: options.encryption
-        x-descriptors:
-        - urn:alm:descriptor:com.tectonic.ui:booleanSwitch
-      - description: Version of the database
-        displayName: Version
-        path: options.version
-        x-descriptors:
-        - urn:alm:descriptor:text
-      - description: Deploy a kibana addon as well?
-        displayName: kibana
-        path: options.kibana
-      - description: Deploy apm server addon as well?
-        displayName: apm
-        path: options.apm
-      - description: Clever Cloud's organisation to spawn the database
-        displayName: Organisation
-        path: organisation
-        x-descriptors:
-        - urn:alm:descriptor:text
-      statusDescriptors:
-      - description: Clever Cloud's addon identifier
-        displayName: Addon
-        path: addon
-        x-descriptors:
-        - urn:alm:descriptor:text
   installModes:
   - supported: true
     type: OwnNamespace
@@ -459,7 +347,7 @@ spec:
   install:
     strategy: deployment
     permissions:
-    - serviceAccountName: clever-operator
+    - serviceAccountName: clever-kubernetes-operator
       rules:
       - apiGroups: [""]
         resources: ["secrets", "events"]
@@ -469,32 +357,30 @@ spec:
         verbs: ["*"]
     spec:
       deployments:
-      - name: clever-operator
+      - name: clever-kubernetes-operator
         spec:
           replicas: 1
           selector:
             matchLabels:
-              app: clever-operator
+              app: clever-kubernetes-operator
           template:
             metadata:
               labels:
-                app: clever-operator
+                app: clever-kubernetes-operator
             spec:
               containers:
-                - image: clevercloud/clever-operator:5479ce18039bea686c167939eb77a2bc370a0e85
+                - image: clevercloud/clever-kubernetes-operator:1680db2488c8be856caea616512caffe6ff86707
                   imagePullPolicy: Always
-                  name: clever-operator
-                  command: ["/usr/local/bin/clever-operator"]
+                  name: clever-kubernetes-operator
+                  command: ["/usr/local/bin/clever-kubernetes-operator"]
                   args: ["-vvvvvvv"]
                   resources:
                     requests:
                       memory: 64M
                       cpu: 100m
-                      ephemeral-storage: 128Mi
                     limits:
                       memory: 64M
                       cpu: 100m
-                      ephemeral-storage: 128Mi
                   ports:
                     - containerPort: 8000
                       protocol: TCP

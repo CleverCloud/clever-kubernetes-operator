@@ -12,7 +12,7 @@ use crate::svc::k8s::resource;
 // -----------------------------------------------------------------------------
 // Constants
 
-pub const OVERRIDE_CONFIGURATION_NAME: &str = "clever-operator";
+pub const OVERRIDE_CONFIGURATION_NAME: &str = "clever-kubernetes-operator";
 
 // -----------------------------------------------------------------------------
 // Helpers
