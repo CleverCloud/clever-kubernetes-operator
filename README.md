@@ -106,6 +106,60 @@ $ kubectl apply -f https://raw.githubusercontent.com/CleverCloud/clever-kubernet
 $ kubectl apply -f https://raw.githubusercontent.com/CleverCloud/clever-kubernetes-operator/main/deployments/kubernetes/v1.30.0/20-deployment.yaml
 ```
 
+## Credentials
+
+To connect to the Clever Cloud API, the operator supports three authentication methods:
+
+### 1. Full OAuth1 Authentication (Four Parameters)
+
+This option uses the complete OAuth1 authentication flow with all four required credentials.
+
+```toml
+[api]
+token = "your-oauth-token"
+secret = "your-oauth-secret"
+consumer-key = "your-consumer-key"
+consumer-secret = "your-consumer-secret"
+```
+
+**When to use:**
+- When you have your own OAuth consumer application registered with Clever Cloud
+- When you need custom permissions or scopes
+- For production environments where you want full control over authentication
+
+### 2. Simplified OAuth1 Authentication (Token and Secret Only)
+
+This option uses OAuth1 authentication but automatically applies the public Clever Tools consumer credentials when you only provide token and secret.
+
+```toml
+[api]
+token = "your-oauth-token"
+secret = "your-oauth-secret"
+```
+
+**When to use:**
+- For most standard use cases
+- When you have personal tokens but don't want to manage consumer credentials
+- For development or testing environments
+
+When only token and secret are provided, the SDK automatically uses the same public consumer credentials as the Clever Cloud CLI tools.
+
+### 3. Bearer Token Authentication
+
+This is the simplest authentication method, using a single bearer token with the "oauthless auth backend."
+
+```toml
+[api]
+token = "your-bearer-token"
+```
+
+**When to use:**
+- When working with the oauthless auth backend
+- For simple integrations or scripts
+- When you have a personal access token that doesn't require OAuth flow
+
+For most users, Option 2 (token and secret only) provides the best balance of security and convenience.
+
 ## Configuration
 
 ### Global
