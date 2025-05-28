@@ -25,7 +25,9 @@ axum = { version = "^0.8.1", default-features = false, features = [
 base64 = "^0.22.1"
 chrono = { version = "^0.4.40", default-features = false }
 clap = { version = "^4.5.34", features = ["derive"] }
-clevercloud-sdk = { version = "0.15.0", features = ["jsonschemas"] }
+clevercloud-sdk = { path = "../clevercloud-sdk-rust", features = [
+    "jsonschemas",
+] }
 config = "^0.15.9"
 futures = "^0.3.31"
 hostname = "^0.4.0"
@@ -61,7 +63,7 @@ serde_yaml = "^0.9.33"
 tempfile = "^3.18.0"
 toml = "^0.8.20"
 thiserror = "^2.0.12"
-tokio = { version = "^1.44.0", features = ["full"] }
+tokio = { version = "^1.45.1", features = ["full"] }
 tracing = { version = "^0.1.41" }
 tracing-subscriber = { version = "^0.3.19", default-features = false, features = [
     "std",

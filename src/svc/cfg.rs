@@ -9,7 +9,7 @@ use std::{
     path::PathBuf,
 };
 
-use clevercloud_sdk::Credentials;
+use clevercloud_sdk::oauth10a::credentials::Credentials;
 use config::{Config, ConfigError, File};
 use serde::{Deserialize, Serialize};
 use tracing::warn;
@@ -355,8 +355,12 @@ impl Configuration {
                     warn!(key = "api.username", "Configuration key has an empty value");
                 }
 
-                if password.is_empty() {
-                    warn!(key = "api.password", "Configuration key has an empty value");
+                match password {
+                    None => warn!(key = "api.password", "Configuration key has an empty value"),
+                    Some(password) if password.is_empty() => {
+                        warn!(key = "api.password", "Configuration key has an empty value")
+                    }
+                    _ => (),
                 }
             }
             Credentials::Bearer { token } => {

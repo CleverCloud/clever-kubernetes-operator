@@ -6,8 +6,11 @@
 use std::{collections::BTreeMap, fmt::Debug, future::Future};
 
 use clevercloud_sdk::{
-    oauth10a::{ClientError, reqwest::StatusCode},
-    v2::addon::{self, Addon, CreateOpts, Error},
+    oauth10a::reqwest::StatusCode,
+    v2::{
+        ErrorResponse,
+        addon::{self, Addon, CreateOpts, Error},
+    },
 };
 use tracing::{debug, trace};
 
@@ -52,8 +55,8 @@ pub trait AddonExt: Into<CreateOpts> + Clone + Debug + Sync + Send {
                     Ok(addon) => {
                         return Ok(Some(addon));
                     }
-                    Err(Error::Get(_, _, ClientError::StatusCode(code, _)))
-                        if StatusCode::NOT_FOUND.as_u16() == code.as_u16() =>
+                    Err(Error::StatusCode(ErrorResponse { status_code, .. }))
+                        if StatusCode::NOT_FOUND.as_u16() == status_code.as_u16() =>
                     {
                         // try to retrieve the addon from the name
                         trace!(
