@@ -13,6 +13,24 @@ It can be retrieve from the console directly in the organisation panel overview
 in the top right corner or from the URL. It can have two forms, one starting by
 `user_` and the other starting by `orga_` and in both cases following by a uuid.
 
+## Supported region
+
+To deploy on a specific region, use one of these codes:
+
+| Name                                | Code     |
+|-------------------------------------|----------|
+| Paris                               | `par`    |
+| Paris (with HDS certification)      | `parhds` |
+| Scaleway                            | `scw`    |
+| Gravelines (with HDS certification) | `grahds` |
+| London                              | `ldn`    |
+| Montreal                            | `mtl`    |
+| Roubaix                             | `rbx`    |
+| Roubaix (with HDS certification)    | `rbxhds` |
+| Singapore                           | `sgp`    |
+| Sydney                              | `syd`    |
+| Warsaw                              | `wsw`    |
+
 ## PostgreSql
 
 Below, you will find the custom resource in yaml format that you can use to
@@ -40,29 +58,11 @@ spec:
 
 | Version | Code |
 |---------|------|
-| `11`    | 11   |
-| `12`    | 12   |
 | `13`    | 13   |
 | `14`    | 14   |
 | `15`    | 15   |
 | `16`    | 16   |
 | `17`    | 17   |
-
-### Supported region
-
-For region, the code could be used to select the desired region.
-
-| Name                                | Code     |
-|-------------------------------------|----------|
-| Paris                               | `par`    |
-| Gravelines (with HDS certification) | `grahds` |
-| Roubaix                             | `rbx`    |
-| Roubaix (with HDS certification)    | `rbxhds` |
-| Scaleway                            | `scw`    |
-| Montreal                            | `mtl`    |
-| Singapore                           | `sgp`    |
-| Sydney                              | `syd`    |
-| Warsaw                              | `wsw`    |
 
 ### Supported plan
 
@@ -131,22 +131,6 @@ spec:
 | `8.0`   | 80   |
 | `8.4`   | 84   |
 
-### Supported region
-
-For region, the code could be used to select the desired region.
-
-| Name                                | Code     |
-|-------------------------------------|----------|
-| Paris                               | `par`    |
-| Gravelines (with HDS certification) | `grahds` |
-| Roubaix                             | `rbx`    |
-| Roubaix (with HDS certification)    | `rbxhds` |
-| Scaleway                            | `scw`    |
-| Montreal                            | `mtl`    |
-| Singapore                           | `sgp`    |
-| Sydney                              | `syd`    |
-| Warsaw                              | `wsw`    |
-
 ### Supported plan
 
 For plan, both name and code could be used to select the desired plan.
@@ -205,23 +189,7 @@ spec:
 
 | Version | Code |
 |---------|------|
-| `7.2.4` | 724  |
-
-### Supported region
-
-For region, the code could be used to select the desired region.
-
-| Name                                | Code     |
-|-------------------------------------|----------|
-| Paris                               | `par`    |
-| Gravelines (with HDS certification) | `grahds` |
-| Roubaix                             | `rbx`    |
-| Roubaix (with HDS certification)    | `rbxhds` |
-| Scaleway                            | `scw`    |
-| Montreal                            | `mtl`    |
-| Singapore                           | `sgp`    |
-| Sydney                              | `syd`    |
-| Warsaw                              | `wsw`    |
+| `8.0.2` | 802  |
 
 ### Supported plan
 
@@ -265,22 +233,6 @@ spec:
 | Version | Code |
 |---------|------|
 | `4.0.3` | 403  |
-
-### Supported region
-
-For region, the code could be used to select the desired region.
-
-| Name                                | Code     |
-|-------------------------------------|----------|
-| Paris                               | `par`    |
-| Gravelines (with HDS certification) | `grahds` |
-| Roubaix                             | `rbx`    |
-| Roubaix (with HDS certification)    | `rbxhds` |
-| Scaleway                            | `scw`    |
-| Montreal                            | `mtl`    |
-| Singapore                           | `sgp`    |
-| Sydney                              | `syd`    |
-| Warsaw                              | `wsw`    |
 
 ### Supported plan
 
