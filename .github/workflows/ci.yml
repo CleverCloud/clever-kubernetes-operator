@@ -124,6 +124,9 @@ jobs:
   docker-build-and-push:
     name: Docker build and push
     runs-on: ubuntu-latest
+    # Do not log in to or push to Docker Hub on pull requests: it exposes the
+    # registry credentials to PR-triggered runs. Only run on push to main (#150).
+    if: ${{ github.event_name != 'pull_request' }}
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v3
@@ -148,6 +151,8 @@ jobs:
   docker-build-and-push-openshift-manifest:
     name: Docker build and push openshift manifest
     runs-on: ubuntu-latest
+    # Same as above: keep Docker Hub credentials off pull requests (#150).
+    if: ${{ github.event_name != 'pull_request' }}
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
