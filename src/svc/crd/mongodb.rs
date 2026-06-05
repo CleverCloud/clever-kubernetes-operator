@@ -23,7 +23,7 @@ use kube::{
 };
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use tracing::{debug, error, info};
+use tracing::{debug, info};
 
 use crate::svc::{
     clevercloud::{self, ext::AddonExt},
