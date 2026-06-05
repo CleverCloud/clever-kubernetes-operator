@@ -36,7 +36,7 @@ pub enum Error {
     #[error("failed to write configuration in temporary file, {0}")]
     Io(std::io::Error),
     #[error("failed to parse configuration file, {0}")]
-    Configuration(cfg::Error),
+    Configuration(Box<cfg::Error>),
 }
 
 impl From<tokio::task::JoinError> for Error {
@@ -55,7 +55,7 @@ impl From<std::io::Error> for Error {
 
 impl From<cfg::Error> for Error {
     fn from(err: cfg::Error) -> Self {
-        Self::Configuration(err)
+        Self::Configuration(Box::new(err))
     }
 }
 
