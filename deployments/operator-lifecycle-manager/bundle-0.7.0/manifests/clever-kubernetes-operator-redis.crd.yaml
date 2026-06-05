@@ -61,8 +61,8 @@ spec:
                     type: boolean
                   version:
                     enum:
-                    - 626
-                    - 704
+                    - 724
+                    - 880
                     type: integer
                 required:
                 - encryption

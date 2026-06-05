@@ -9,92 +9,93 @@ spec:
     kind: PostgreSql
     plural: postgresqls
     shortNames:
-      - pg
+    - pg
     singular: postgresql
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - description: Organisation
-          jsonPath: .spec.organisation
-          name: organisation
-          type: string
-        - description: Addon
-          jsonPath: .status.addon
-          name: addon
-          type: string
-        - description: Region
-          jsonPath: .spec.instance.region
-          name: region
-          type: string
-        - description: Instance
-          jsonPath: .spec.instance.plan
-          name: instance
-          type: string
-        - description: Version
-          jsonPath: .spec.options.version
-          name: version
-          type: integer
-        - description: Cold encryption
-          jsonPath: .spec.options.encryption
-          name: encrypted
-          type: boolean
-      name: v1
-      schema:
-        openAPIV3Schema:
-          description: Auto-generated derived type for Spec via `CustomResource`
-          properties:
-            spec:
-              properties:
-                instance:
-                  properties:
-                    plan:
-                      type: string
-                    region:
-                      type: string
-                  required:
-                    - plan
-                    - region
-                  type: object
-                options:
-                  properties:
-                    encryption:
-                      type: boolean
-                    version:
-                      enum:
-                        - 11
-                        - 12
-                        - 13
-                        - 14
-                        - 15
-                        - 16
-                        - 17
-                      type: integer
-                  required:
-                    - encryption
-                    - version
-                  type: object
-                organisation:
-                  type: string
-              required:
-                - instance
-                - options
-                - organisation
-              type: object
-            status:
-              nullable: true
-              properties:
-                addon:
-                  nullable: true
-                  type: string
-              type: object
-          required:
-            - spec
-          title: PostgreSql
-          type: object
-      served: true
-      storage: true
-      subresources:
-        status: {}
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Version
+      jsonPath: .spec.options.version
+      name: version
+      type: integer
+    - description: Cold encryption
+      jsonPath: .spec.options.encryption
+      name: encrypted
+      type: boolean
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                properties:
+                  encryption:
+                    type: boolean
+                  version:
+                    enum:
+                    - 11
+                    - 12
+                    - 13
+                    - 14
+                    - 15
+                    - 16
+                    - 17
+                    - 18
+                    type: integer
+                required:
+                - encryption
+                - version
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - options
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: PostgreSql
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
 
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -108,86 +109,87 @@ spec:
     kind: Redis
     plural: redis
     shortNames:
-      - r
+    - r
     singular: redis
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - description: Organisation
-          jsonPath: .spec.organisation
-          name: organisation
-          type: string
-        - description: Addon
-          jsonPath: .status.addon
-          name: addon
-          type: string
-        - description: Region
-          jsonPath: .spec.instance.region
-          name: region
-          type: string
-        - description: Instance
-          jsonPath: .spec.instance.plan
-          name: instance
-          type: string
-        - description: Version
-          jsonPath: .spec.options.version
-          name: version
-          type: integer
-        - description: Cold encryption
-          jsonPath: .spec.options.encryption
-          name: encrypted
-          type: boolean
-      name: v1
-      schema:
-        openAPIV3Schema:
-          description: Auto-generated derived type for Spec via `CustomResource`
-          properties:
-            spec:
-              properties:
-                instance:
-                  properties:
-                    plan:
-                      type: string
-                    region:
-                      type: string
-                  required:
-                    - plan
-                    - region
-                  type: object
-                options:
-                  properties:
-                    encryption:
-                      type: boolean
-                    version:
-                      enum:
-                        - 724
-                      type: integer
-                  required:
-                    - encryption
-                    - version
-                  type: object
-                organisation:
-                  type: string
-              required:
-                - instance
-                - options
-                - organisation
-              type: object
-            status:
-              nullable: true
-              properties:
-                addon:
-                  nullable: true
-                  type: string
-              type: object
-          required:
-            - spec
-          title: Redis
-          type: object
-      served: true
-      storage: true
-      subresources:
-        status: {}
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Version
+      jsonPath: .spec.options.version
+      name: version
+      type: integer
+    - description: Cold encryption
+      jsonPath: .spec.options.encryption
+      name: encrypted
+      type: boolean
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                properties:
+                  encryption:
+                    type: boolean
+                  version:
+                    enum:
+                    - 724
+                    - 880
+                    type: integer
+                required:
+                - encryption
+                - version
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - options
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: Redis
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
 
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -201,88 +203,88 @@ spec:
     kind: MySql
     plural: mysqls
     shortNames:
-      - my
+    - my
     singular: mysql
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - description: Organisation
-          jsonPath: .spec.organisation
-          name: organisation
-          type: string
-        - description: Addon
-          jsonPath: .status.addon
-          name: addon
-          type: string
-        - description: Region
-          jsonPath: .spec.instance.region
-          name: region
-          type: string
-        - description: Instance
-          jsonPath: .spec.instance.plan
-          name: instance
-          type: string
-        - description: Version
-          jsonPath: .spec.options.version
-          name: version
-          type: integer
-        - description: Cold encryption
-          jsonPath: .spec.options.encryption
-          name: encrypted
-          type: boolean
-      name: v1
-      schema:
-        openAPIV3Schema:
-          description: Auto-generated derived type for Spec via `CustomResource`
-          properties:
-            spec:
-              properties:
-                instance:
-                  properties:
-                    plan:
-                      type: string
-                    region:
-                      type: string
-                  required:
-                    - plan
-                    - region
-                  type: object
-                options:
-                  properties:
-                    encryption:
-                      type: boolean
-                    version:
-                      enum:
-                        - 57
-                        - 80
-                        - 84
-                      type: integer
-                  required:
-                    - encryption
-                    - version
-                  type: object
-                organisation:
-                  type: string
-              required:
-                - instance
-                - options
-                - organisation
-              type: object
-            status:
-              nullable: true
-              properties:
-                addon:
-                  nullable: true
-                  type: string
-              type: object
-          required:
-            - spec
-          title: MySql
-          type: object
-      served: true
-      storage: true
-      subresources:
-        status: {}
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Version
+      jsonPath: .spec.options.version
+      name: version
+      type: integer
+    - description: Cold encryption
+      jsonPath: .spec.options.encryption
+      name: encrypted
+      type: boolean
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                properties:
+                  encryption:
+                    type: boolean
+                  version:
+                    enum:
+                    - 57
+                    - 80
+                    - 84
+                    type: integer
+                required:
+                - encryption
+                - version
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - options
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: MySql
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
 
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -296,86 +298,86 @@ spec:
     kind: MongoDb
     plural: mongodbs
     shortNames:
-      - mo
+    - mo
     singular: mongodb
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - description: Organisation
-          jsonPath: .spec.organisation
-          name: organisation
-          type: string
-        - description: Addon
-          jsonPath: .status.addon
-          name: addon
-          type: string
-        - description: Region
-          jsonPath: .spec.instance.region
-          name: region
-          type: string
-        - description: Instance
-          jsonPath: .spec.instance.plan
-          name: instance
-          type: string
-        - description: Version
-          jsonPath: .spec.options.version
-          name: version
-          type: integer
-        - description: Cold encryption
-          jsonPath: .spec.options.encryption
-          name: encrypted
-          type: boolean
-      name: v1
-      schema:
-        openAPIV3Schema:
-          description: Auto-generated derived type for Spec via `CustomResource`
-          properties:
-            spec:
-              properties:
-                instance:
-                  properties:
-                    plan:
-                      type: string
-                    region:
-                      type: string
-                  required:
-                    - plan
-                    - region
-                  type: object
-                options:
-                  properties:
-                    encryption:
-                      type: boolean
-                    version:
-                      enum:
-                        - 403
-                      type: integer
-                  required:
-                    - encryption
-                    - version
-                  type: object
-                organisation:
-                  type: string
-              required:
-                - instance
-                - options
-                - organisation
-              type: object
-            status:
-              nullable: true
-              properties:
-                addon:
-                  nullable: true
-                  type: string
-              type: object
-          required:
-            - spec
-          title: MongoDb
-          type: object
-      served: true
-      storage: true
-      subresources:
-        status: {}
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Version
+      jsonPath: .spec.options.version
+      name: version
+      type: integer
+    - description: Cold encryption
+      jsonPath: .spec.options.encryption
+      name: encrypted
+      type: boolean
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                properties:
+                  encryption:
+                    type: boolean
+                  version:
+                    enum:
+                    - 403
+                    type: integer
+                required:
+                - encryption
+                - version
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - options
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: MongoDb
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
 
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -389,59 +391,59 @@ spec:
     kind: Pulsar
     plural: pulsars
     shortNames:
-      - pulse
-      - pul
+    - pulse
+    - pul
     singular: pulsar
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - description: Organisation
-          jsonPath: .spec.organisation
-          name: organisation
-          type: string
-        - description: Addon
-          jsonPath: .status.addon
-          name: addon
-          type: string
-        - description: Region
-          jsonPath: .spec.instance.region
-          name: region
-          type: string
-      name: v1beta1
-      schema:
-        openAPIV3Schema:
-          description: Auto-generated derived type for Spec via `CustomResource`
-          properties:
-            spec:
-              properties:
-                instance:
-                  properties:
-                    region:
-                      type: string
-                  required:
-                    - region
-                  type: object
-                organisation:
-                  type: string
-              required:
-                - instance
-                - organisation
-              type: object
-            status:
-              nullable: true
-              properties:
-                addon:
-                  nullable: true
-                  type: string
-              type: object
-          required:
-            - spec
-          title: Pulsar
-          type: object
-      served: true
-      storage: true
-      subresources:
-        status: {}
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  region:
+                    type: string
+                required:
+                - region
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: Pulsar
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
 
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -455,51 +457,51 @@ spec:
     kind: ConfigProvider
     plural: configproviders
     shortNames:
-      - cp
+    - cp
     singular: configprovider
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - description: Organisation
-          jsonPath: .spec.organisation
-          name: organisation
-          type: string
-        - description: Addon
-          jsonPath: .status.addon
-          name: addon
-          type: string
-      name: v1
-      schema:
-        openAPIV3Schema:
-          description: Auto-generated derived type for Spec via `CustomResource`
-          properties:
-            spec:
-              properties:
-                organisation:
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              organisation:
+                type: string
+              variables:
+                additionalProperties:
                   type: string
-                variables:
-                  additionalProperties:
-                    type: string
-                  type: object
-              required:
-                - organisation
-                - variables
-              type: object
-            status:
-              nullable: true
-              properties:
-                addon:
-                  nullable: true
-                  type: string
-              type: object
-          required:
-            - spec
-          title: ConfigProvider
-          type: object
-      served: true
-      storage: true
-      subresources:
-        status: {}
+                type: object
+            required:
+            - organisation
+            - variables
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: ConfigProvider
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
 
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -513,101 +515,102 @@ spec:
     kind: ElasticSearch
     plural: elasticsearches
     shortNames:
-      - es
+    - es
     singular: elasticsearch
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - description: Organisation
-          jsonPath: .spec.organisation
-          name: organisation
-          type: string
-        - description: Addon
-          jsonPath: .status.addon
-          name: addon
-          type: string
-        - description: Region
-          jsonPath: .spec.instance.region
-          name: region
-          type: string
-        - description: Instance
-          jsonPath: .spec.instance.plan
-          name: instance
-          type: string
-        - description: Version
-          jsonPath: .spec.options.version
-          name: version
-          type: integer
-        - description: Cold encryption
-          jsonPath: .spec.options.encryption
-          name: encrypted
-          type: boolean
-        - description: Kibana
-          jsonPath: .spec.options.kibana
-          name: kibana
-          type: boolean
-        - description: Application Perfomance Monitoring
-          jsonPath: .spec.options.apm
-          name: apm
-          type: boolean
-      name: v1
-      schema:
-        openAPIV3Schema:
-          description: Auto-generated derived type for Spec via `CustomResource`
-          properties:
-            spec:
-              properties:
-                instance:
-                  properties:
-                    plan:
-                      type: string
-                    region:
-                      type: string
-                  required:
-                    - plan
-                    - region
-                  type: object
-                options:
-                  properties:
-                    apm:
-                      type: boolean
-                    encryption:
-                      type: boolean
-                    kibana:
-                      type: boolean
-                    version:
-                      enum:
-                        - 7
-                        - 8
-                      type: integer
-                  required:
-                    - apm
-                    - encryption
-                    - kibana
-                    - version
-                  type: object
-                organisation:
-                  type: string
-              required:
-                - instance
-                - options
-                - organisation
-              type: object
-            status:
-              nullable: true
-              properties:
-                addon:
-                  nullable: true
-                  type: string
-              type: object
-          required:
-            - spec
-          title: ElasticSearch
-          type: object
-      served: true
-      storage: true
-      subresources:
-        status: {}
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Version
+      jsonPath: .spec.options.version
+      name: version
+      type: integer
+    - description: Cold encryption
+      jsonPath: .spec.options.encryption
+      name: encrypted
+      type: boolean
+    - description: Kibana
+      jsonPath: .spec.options.kibana
+      name: kibana
+      type: boolean
+    - description: Application Performance Monitoring
+      jsonPath: .spec.options.apm
+      name: apm
+      type: boolean
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                properties:
+                  apm:
+                    type: boolean
+                  encryption:
+                    type: boolean
+                  kibana:
+                    type: boolean
+                  version:
+                    enum:
+                    - 7
+                    - 8
+                    - 9
+                    type: integer
+                required:
+                - apm
+                - encryption
+                - kibana
+                - version
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - options
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: ElasticSearch
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
 
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -624,51 +627,539 @@ spec:
     singular: kv
   scope: Namespaced
   versions:
-    - additionalPrinterColumns:
-        - description: Organisation
-          jsonPath: .spec.organisation
-          name: organisation
-          type: string
-        - description: Addon
-          jsonPath: .status.addon
-          name: addon
-          type: string
-        - description: Region
-          jsonPath: .spec.instance.region
-          name: region
-          type: string
-      name: v1alpha1
-      schema:
-        openAPIV3Schema:
-          description: Auto-generated derived type for Spec via `CustomResource`
-          properties:
-            spec:
-              properties:
-                instance:
-                  properties:
-                    region:
-                      type: string
-                  required:
-                    - region
-                  type: object
-                organisation:
-                  type: string
-              required:
-                - instance
-                - organisation
-              type: object
-            status:
-              nullable: true
-              properties:
-                addon:
-                  nullable: true
-                  type: string
-              type: object
-          required:
-            - spec
-          title: KV
-          type: object
-      served: true
-      storage: true
-      subresources:
-        status: {}
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  region:
+                    type: string
+                required:
+                - region
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: KV
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: metabases.api.clever-cloud.com
+spec:
+  group: api.clever-cloud.com
+  names:
+    categories: []
+    kind: Metabase
+    plural: metabases
+    shortNames:
+    - mb
+    singular: metabase
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Url
+      jsonPath: .status.url
+      name: url
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                default: {}
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+              url:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: Metabase
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: keycloaks.api.clever-cloud.com
+spec:
+  group: api.clever-cloud.com
+  names:
+    categories: []
+    kind: Keycloak
+    plural: keycloaks
+    shortNames:
+    - kc
+    singular: keycloak
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: URL
+      jsonPath: .status.url
+      name: url
+      type: string
+    - description: Admin URL
+      jsonPath: .status.admin_url
+      name: admin_url
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                default: {}
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+              admin_url:
+                nullable: true
+                type: string
+              url:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: Keycloak
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: matomos.api.clever-cloud.com
+spec:
+  group: api.clever-cloud.com
+  names:
+    categories: []
+    kind: Matomo
+    plural: matomos
+    shortNames: []
+    singular: matomo
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Url
+      jsonPath: .status.url
+      name: url
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                default: {}
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+              url:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: Matomo
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: otoroshis.api.clever-cloud.com
+spec:
+  group: api.clever-cloud.com
+  names:
+    categories: []
+    kind: Otoroshi
+    plural: otoroshis
+    shortNames: []
+    singular: otoroshi
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Url
+      jsonPath: .status.url
+      name: url
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                default: {}
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+              url:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: Otoroshi
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: azimutts.api.clever-cloud.com
+spec:
+  group: api.clever-cloud.com
+  names:
+    categories: []
+    kind: Azimutt
+    plural: azimutts
+    shortNames: []
+    singular: azimutt
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                default: {}
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: Azimutt
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: cellars.api.clever-cloud.com
+spec:
+  group: api.clever-cloud.com
+  names:
+    categories: []
+    kind: Cellar
+    plural: cellars
+    shortNames: []
+    singular: cellar
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - description: Organisation
+      jsonPath: .spec.organisation
+      name: organisation
+      type: string
+    - description: Addon
+      jsonPath: .status.addon
+      name: addon
+      type: string
+    - description: Region
+      jsonPath: .spec.instance.region
+      name: region
+      type: string
+    - description: Instance
+      jsonPath: .spec.instance.plan
+      name: instance
+      type: string
+    - description: Url
+      jsonPath: .status.url
+      name: url
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: Auto-generated derived type for Spec via `CustomResource`
+        properties:
+          spec:
+            properties:
+              instance:
+                properties:
+                  plan:
+                    type: string
+                  region:
+                    type: string
+                required:
+                - plan
+                - region
+                type: object
+              options:
+                default: {}
+                type: object
+              organisation:
+                type: string
+            required:
+            - instance
+            - organisation
+            type: object
+          status:
+            nullable: true
+            properties:
+              addon:
+                nullable: true
+                type: string
+              url:
+                nullable: true
+                type: string
+            type: object
+        required:
+        - spec
+        title: Cellar
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
