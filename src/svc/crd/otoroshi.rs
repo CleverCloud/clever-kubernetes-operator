@@ -23,7 +23,7 @@ use kube::{
 };
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use tracing::{debug, error, info};
+use tracing::{debug, info};
 
 use crate::svc::{
     clevercloud::{self, ext::AddonExt},
@@ -483,29 +483,29 @@ impl k8s::Reconciler<Otoroshi> for Reconciler {
         // ---------------------------------------------------------------------
         // Step 5: update the status
 
-        if let Some(url) = url {
-            if modified.get_url().as_deref() != Some(url.as_str()) {
-                let action = &Action::UpdateUrl;
-                let message = &format!("Update url to '{url}'");
+        if let Some(url) = url
+            && modified.get_url().as_deref() != Some(url.as_str())
+        {
+            let action = &Action::UpdateUrl;
+            let message = &format!("Update url to '{url}'");
 
-                modified.set_url(Some(url));
+            modified.set_url(Some(url));
 
-                let patch = resource::diff(&*origin, &modified).map_err(ReconcilerError::Diff)?;
-                let modified = resource::patch(kube.to_owned(), &modified, patch.to_owned())
-                    .and_then(|modified| resource::patch_status(kube.to_owned(), modified, patch))
-                    .await?;
+            let patch = resource::diff(&*origin, &modified).map_err(ReconcilerError::Diff)?;
+            let modified = resource::patch(kube.to_owned(), &modified, patch.to_owned())
+                .and_then(|modified| resource::patch_status(kube.to_owned(), modified, patch))
+                .await?;
 
-                info!(
-                    action = action.to_string(),
-                    kind = &kind,
-                    namespace = &namespace,
-                    name = &name,
-                    message = message,
-                    "Create event for custom resource",
-                );
+            info!(
+                action = action.to_string(),
+                kind = &kind,
+                namespace = &namespace,
+                name = &name,
+                message = message,
+                "Create event for custom resource",
+            );
 
-                recorder::normal(kube.to_owned(), &modified, action, message).await?;
-            }
+            recorder::normal(kube.to_owned(), &modified, action, message).await?;
         }
 
         Ok(())

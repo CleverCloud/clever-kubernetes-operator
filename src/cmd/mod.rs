@@ -5,7 +5,7 @@ use std::{future::Future, io, path::PathBuf, sync::Arc};
 
 use clap::{ArgAction, Parser, Subcommand};
 use paw::ParseArgs;
-use tracing::{error, info};
+use tracing::info;
 
 use crate::{
     cmd::{configmap::ConfigMapError, crd::CustomResourceDefinitionError, secret::SecretError},

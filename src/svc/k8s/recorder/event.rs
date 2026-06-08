@@ -5,11 +5,11 @@
 
 use std::fmt::Debug;
 
-use chrono::Utc;
 use k8s_openapi::{
     NamespaceResourceScope,
     api::core::v1::{Event, EventSource},
     apimachinery::pkg::apis::meta::v1::{MicroTime, Time},
+    jiff::Timestamp,
 };
 use kube::{CustomResourceExt, Resource, ResourceExt, api::ObjectMeta};
 
@@ -30,7 +30,7 @@ where
     T: Resource<Scope = NamespaceResourceScope> + ResourceExt + CustomResourceExt + Debug,
     U: ToString + Debug,
 {
-    let now = Utc::now();
+    let now = Timestamp::now();
 
     Event {
         metadata: ObjectMeta {
@@ -39,7 +39,7 @@ where
                 "{}-{}-{}",
                 obj.name_any(),
                 action.to_string().to_lowercase(),
-                now.timestamp()
+                now.as_second()
             )),
             ..Default::default()
         },
