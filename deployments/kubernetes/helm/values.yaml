@@ -15,7 +15,7 @@ image:
   repository: clevercloud/clever-kubernetes-operator
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "38d856d984753a7cf6d406aaa1f5576b5cd26236"
+  tag: "3e427f3bb10071bd95811ba74a6a71bd247a8fb7"
 
 # Declare your secrets for the operator to create add-ons on Clever Cloud
 config:
