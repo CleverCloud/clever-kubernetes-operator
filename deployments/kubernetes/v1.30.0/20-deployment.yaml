@@ -150,7 +150,7 @@ spec:
         secret:
           secretName: clever-kubernetes-operator-configuration
       containers:
-        - image: clevercloud/clever-kubernetes-operator:38d856d984753a7cf6d406aaa1f5576b5cd26236
+        - image: clevercloud/clever-kubernetes-operator:3e427f3bb10071bd95811ba74a6a71bd247a8fb7
           imagePullPolicy: Always
           name: clever-kubernetes-operator
           command: ["/usr/local/bin/clever-kubernetes-operator"]
