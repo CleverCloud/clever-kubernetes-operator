@@ -139,7 +139,7 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port: '8080'
+        prometheus.io/port: '8000'
       labels:
         app: clever-kubernetes-operator
     spec:
@@ -169,7 +169,7 @@ spec:
               cpu: 100m
               ephemeral-storage: 128Mi
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
               protocol: TCP
               name: observability
           readinessProbe:
