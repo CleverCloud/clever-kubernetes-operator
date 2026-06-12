@@ -187,5 +187,10 @@ spec:
             runAsNonRoot: true
             runAsGroup: 25000
             runAsUser: 20000
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
