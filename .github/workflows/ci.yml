@@ -7,6 +7,10 @@ on:
   push:
     branches:
     - "main"
+# Least-privilege default token: jobs only read the repo; Docker pushes use
+# dedicated Docker Hub secrets, not the GITHUB_TOKEN (#151).
+permissions:
+  contents: read
 jobs:
   build:
     name: Build operator
@@ -20,16 +24,11 @@ jobs:
           - beta
           - nightly
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
         with:
           toolchain: ${{ matrix.rust }}
-          profile: minimal
-          override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --verbose --all-features
+      - run: cargo build --verbose --all-features
   build-no-default-features:
     name: Build operator with no features enabled
     runs-on: ubuntu-latest
@@ -41,16 +40,11 @@ jobs:
         rust:
           - 1.91.0
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
         with:
           toolchain: ${{ matrix.rust }}
-          profile: minimal
-          override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --verbose --no-default-features
+      - run: cargo build --verbose --no-default-features
   test:
     name: Test operator
     runs-on: ubuntu-latest
@@ -63,64 +57,46 @@ jobs:
           - beta
           - nightly
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
         with:
           toolchain: ${{ matrix.rust }}
-          profile: minimal
-          override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: install
-          args: cargo-tarpaulin
-      - uses: actions-rs/cargo@v1
-        with:
-          command: tarpaulin
-          args: --verbose --all-features
+      - run: cargo install cargo-tarpaulin
+      - run: cargo tarpaulin --verbose --all-features
   format:
     name: Format source code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
         with:
-          toolchain: stable
-          profile: minimal
-          override: true
-      - run: rustup component add rustfmt
-      - uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --verbose --all -- --check
+          # Match the repo's pinned rust-toolchain (1.91.0): that file takes
+          # precedence over the installed default, so rustfmt must be added to
+          # 1.91.0, not stable, or `cargo fmt` runs on a toolchain without it.
+          toolchain: 1.91.0
+          components: rustfmt
+      - run: cargo fmt --verbose --all -- --check
   clippy:
     name: Lint source code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
         with:
-          toolchain: stable
-          profile: minimal
-          override: true
-      - run: rustup component add clippy
-      - uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --verbose --all-features -- -D warnings
+          # Same as the format job: clippy must be installed on the pinned
+          # 1.91.0 toolchain (rust-toolchain file wins over the default).
+          toolchain: 1.91.0
+          components: clippy
+      - run: cargo clippy --verbose --all-features -- -D warnings
   doc:
     name: Build documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
         with:
           toolchain: stable
-          profile: minimal
-          override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: doc
-          args: --verbose
+      - run: cargo doc --verbose
   docker-build-and-push:
     name: Docker build and push
     runs-on: ubuntu-latest
@@ -128,20 +104,20 @@ jobs:
     # registry credentials to PR-triggered runs. Only run on push to main (#150).
     if: ${{ github.event_name != 'pull_request' }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v3
-      - uses: docker/setup-buildx-action@v3
-      - uses: docker/login-action@v3
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: docker/build-push-action@v6
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
           push: 'true'
           platforms: linux/amd64,linux/arm64
           tags: clevercloud/clever-kubernetes-operator:${{ github.sha }}
-      - uses: docker/build-push-action@v6
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           context: .
@@ -154,14 +130,14 @@ jobs:
     # Same as above: keep Docker Hub credentials off pull requests (#150).
     if: ${{ github.event_name != 'pull_request' }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
-      - uses: docker/login-action@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: docker/build-push-action@v2
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: deployments/operator-lifecycle-manager/bundle-0.8.0
           push: 'true'
@@ -171,8 +147,8 @@ jobs:
     name: Kubernetes validate deployment scripts
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: piraces/kube-score-ga@v0.1.2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: piraces/kube-score-ga@8d395d46cc68e3445353dcacc16fb2b2ae263082 # v0.1.2
         with:
           manifests-folders: 'deployments/kubernetes/v1.30.0/*.yml'
   kubernetes-deployment:
@@ -182,8 +158,8 @@ jobs:
       - kubernetes-deployment-scripts-validation
       - docker-build-and-push
     steps:
-      - uses: actions/checkout@v2
-      - uses: medyagh/setup-minikube@master
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: medyagh/setup-minikube@e9e035a86bbc3caea26a450bd4dbf9d0c453682e # v0.0.21
       - run: kubectl apply -f deployments/kubernetes/v1.30.0
   openshift-deployment:
     name: Create a minikube, install openshift and install the operator
@@ -193,8 +169,8 @@ jobs:
       - docker-build-and-push-openshift-manifest
       - docker-build-and-push
     steps:
-      - uses: actions/checkout@v2
-      - uses: medyagh/setup-minikube@master
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: medyagh/setup-minikube@e9e035a86bbc3caea26a450bd4dbf9d0c453682e # v0.0.21
       - run: curl -L -vvv https://github.com/operator-framework/operator-sdk/releases/download/v1.25.2/operator-sdk_linux_amd64 > /tmp/operator-sdk && chmod +x /tmp/operator-sdk
       - run: /tmp/operator-sdk olm install --verbose --timeout 30m
       - run: /tmp/operator-sdk run bundle --verbose --timeout 30m 'docker.io/clevercloud/clever-kubernetes-operator-manifest:${{ github.sha }}'
