@@ -62,7 +62,7 @@ impl From<cfg::Error> for Error {
 // -----------------------------------------------------------------------------
 // helpers
 
-#[cfg_attr(feature = "tracing", tracing::instrument)]
+#[cfg_attr(feature = "tracing", tracing::instrument(skip(secret)))]
 pub async fn try_from(secret: Secret) -> Result<Client, Error> {
     let buf = blocking(move || {
         let (namespace, name) = resource::namespaced_name(&secret);

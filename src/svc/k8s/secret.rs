@@ -25,7 +25,7 @@ where
     format!("{}-secrets", obj.name_any())
 }
 
-#[cfg_attr(feature = "tracing", tracing::instrument)]
+#[cfg_attr(feature = "tracing", tracing::instrument(skip(secrets)))]
 pub fn new<T>(obj: &T, secrets: BTreeMap<String, String>) -> Secret
 where
     T: Resource<Scope = NamespaceResourceScope> + ResourceExt + CustomResourceExt + Debug,
