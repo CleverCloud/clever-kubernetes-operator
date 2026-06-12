@@ -26,8 +26,8 @@ spec:
       automountServiceAccountToken: true
       volumes:
       - name: config
-        configMap:
-          name: clever-kubernetes-operator-configuration
+        secret:
+          secretName: clever-kubernetes-operator-configuration
           items:
           - key: "config.toml"
             path: "config.toml"
