@@ -55,18 +55,13 @@ pub trait AddonExt: Into<CreateOpts> + Clone + Debug + Sync + Send {
                     Err(Error::Get(_, _, ClientError::StatusCode(code, _)))
                         if StatusCode::NOT_FOUND.as_u16() == code.as_u16() =>
                     {
-                        // try to retrieve the addon from the name
+                        // The stored identifier no longer exists upstream; fall through to
+                        // the name-based lookup below.
                         trace!(
                             id = &id,
                             name = self.name(),
-                            "Trying to retrieve the addon by name for the addon",
+                            "Addon not found by identifier, falling back to name lookup",
                         );
-
-                        return Ok(addon::list(client, &self.organisation())
-                            .await?
-                            .iter()
-                            .find(|addon| addon.name == Some(self.name()))
-                            .map(ToOwned::to_owned));
                     }
                     Err(err) => {
                         return Err(err.into());
@@ -74,8 +69,16 @@ pub trait AddonExt: Into<CreateOpts> + Clone + Debug + Sync + Send {
                 }
             }
 
-            trace!("No such identifier to retrieve addon '{}'", self.name());
-            Ok(None)
+            // Name-based lookup using the deterministic addon name
+            // (`kubernetes::<Kind>::<uid>`). This also runs when no identifier has been
+            // persisted to the CR status yet, which prevents creating a duplicate addon when a
+            // reconcile retries (or another pod reconciles) before the id is saved (#163).
+            trace!(name = self.name(), "Retrieve the addon by name");
+            Ok(addon::list(client, &self.organisation())
+                .await?
+                .iter()
+                .find(|addon| addon.name == Some(self.name()))
+                .map(ToOwned::to_owned))
         }
     }
 
